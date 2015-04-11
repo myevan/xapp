@@ -1,4 +1,5 @@
 #include <x_foundation/XPath.h>
+#include <x_foundation/XString.h>
 
 namespace xf {
 

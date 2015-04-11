@@ -3,8 +3,10 @@
 #ifndef __X_LOG_MACROS__
 #define __X_LOG_MACROS__
 
+#include <x_foundation/XString.h>
 #include <x_foundation/XLogType.h>
 #include <x_foundation/XLogger.h>
+#include <x_foundation/ILogger.h>
 
 #define x_debugn(text) XLogger::GetInstance().Printn(X_LOG_DEBUG, __FILE__, __LINE__, __FUNCTION__, text)
 

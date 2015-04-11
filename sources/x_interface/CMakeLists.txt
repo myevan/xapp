@@ -9,7 +9,7 @@ if (ANDROID)
 
     add_library(x_interface SHARED ${COMMON_SOURCES} ${PLATFORM_SOURCES})
 
-    target_link_libraries(x_interface x_foundation)
+    target_link_libraries(x_interface x_foundation log)
 
     install(TARGETS x_interface 
             RUNTIME DESTINATION bin

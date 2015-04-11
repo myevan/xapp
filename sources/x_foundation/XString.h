@@ -15,23 +15,23 @@ public:
 
 public:
     inline XString()
-    : m_textPtr("")
-    , m_textLen(0)
+    : m_strPtr("")
+    , m_strLen(0)
     {}
 
-    inline XString(const char* textPtr)
-    : m_textPtr(textPtr)
-    , m_textLen(strlen(textPtr))
+    inline XString(const char* strPtr)
+    : m_strPtr(strPtr)
+    , m_strLen(strlen(strPtr))
     {}
 
-    inline XString(const char* textPtr, size_t textLen)
-    : m_textPtr(textPtr)
-    , m_textLen(textLen)
+    inline XString(const char* strPtr, size_t strLen)
+    : m_strPtr(strPtr)
+    , m_strLen(strLen)
     {}
 
 public:
-    inline const char* GetTextPtr() const { return m_textPtr; }
-    inline size_t GetTextLen() const { return m_textLen; }
+    inline const char* GetPtr() const { return m_strPtr; }
+    inline size_t GetLen() const { return m_strLen; }
 
 public:
     inline size_t GetLastIndexOf(char inCharCode) const
@@ -55,17 +55,17 @@ public:
 public:
     inline bool TryGetLastIndexOf(char inCharCode, size_t& outIndex) const
     {
-        const char* endCharPtr = m_textPtr + m_textLen;
-        if (m_textPtr == endCharPtr)
+        const char* endCharPtr = m_strPtr + m_strLen;
+        if (m_strPtr == endCharPtr)
             return false;
 
         endCharPtr--;
 
-        while (endCharPtr != m_textPtr)
+        while (endCharPtr != m_strPtr)
         {
             if (*endCharPtr == inCharCode)
             {
-                outIndex = (endCharPtr - m_textPtr);
+                outIndex = (endCharPtr - m_strPtr);
                 outIndex++;
                 return true;        
             }
@@ -78,16 +78,16 @@ public:
 
     inline bool TryGetUnsafeRight(size_t index, XString& outSlice) const
     {
-        if (index >= m_textLen)
+        if (index >= m_strLen)
             return false;
 
-        outSlice = XString(m_textPtr + index, m_textLen - index); 
+        outSlice = XString(m_strPtr + index, m_strLen - index); 
         return true;
     }
 
 private:
-    const char* m_textPtr;
-    size_t m_textLen;
+    const char* m_strPtr;
+    size_t m_strLen;
 };
 
 

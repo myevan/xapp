@@ -5,10 +5,12 @@
 
 namespace xf {
 
+class XString;
+
 class XInformation
 {
 public:
-    static const char* GetTitle();
+    static const XString& GetTitle();
 };
 
 } // end_of_namespace:xf

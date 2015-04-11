@@ -4,9 +4,10 @@
 #define __I_LOGGER__
 
 #include <x_foundation/XLogType.h>
-#include <x_foundation/XString.h>
 
 namespace xf {
+
+class XString;
 
 class ILogger
 {
