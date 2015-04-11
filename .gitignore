@@ -1,0 +1,7 @@
+__builds
+__platforms
+projects/android_project/bin/*
+projects/android_project/gen/*
+projects/android_project/libs/*
+*.xcuserdatad
+project.xcworkspace
