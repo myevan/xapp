@@ -9,6 +9,7 @@
 #import "ViewController.h"
 
 #include <x_foundation/XInformation.h>
+#include <x_foundation/XLogMacros.h>
 
 using namespace xf;
 
@@ -19,6 +20,8 @@ using namespace xf;
 
     const char* title = XInformation::GetTitle();
     self.mainLabel.stringValue = [NSString stringWithUTF8String:title];
+    
+    x_debugn("!!");
 }
 
 - (void)setRepresentedObject:(id)representedObject {

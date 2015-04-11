@@ -1,7 +1,16 @@
 set(PUBLIC_HEADERS
+    XString.h
+    XLogType.h
+    ILogger.h
+    XLogger.h
+    XLogMacros.h
     XInformation.h)
 
 set(COMMON_SOURCES
+    XString.cpp
+    XPath.cpp
+    XLogger.cpp
+    XNSLogger.mm
     XInformation.cpp)
 
 if (ANDROID)

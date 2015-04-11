@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef __XF_INFORMATION__
-#define __XF_INFORMATION__
+#ifndef __X_INFORMATION__
+#define __X_INFORMATION__
 
 namespace xf {
 
