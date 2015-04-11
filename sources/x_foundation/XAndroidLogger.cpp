@@ -26,33 +26,22 @@ void XAndroidLogger::Printn(XLogType logType, const XString& filePath, int fileL
     const char* tagPtr = tag.GetPtr();
 
     XString fileName = XPath::GetPathLeaf(filePath);
-    const char* fileNamePtr = fileName.GetPtr();
-    const char* funcNamePtr = funcName.GetPtr();
-    const char* textPtr = text.GetPtr();
 
-    XStringSizer strSizer(bufPtr, bufMaxLen);
-    strSizer.AppendChar('(');
-    strSizer.AppendXString(fileName);
-    strSizer.AppendChar(':');
-    strSizer.AppendIntf(16, "%d", fileLineNum);
-    strSizer.AppendChar(')');
-    strSizer.AppendChar(' ');
-    strSizer.AppendXStr(funcName);
-    strSizer.AppendChar(':');
+    XStringSizer strSizer;
     strSizer.AppendXStr(text);
+    strSizer.AppendCStr(" in ");
+    strSizer.AppendXStr(fileName);
+    strSizer.AppendForm(16, "(%d):", fileLineNum);
+    strSizer.AppendXStr(funcName);
 
     size_t bufMaxLen = strSizer.GetLen();
-    char* bufPtr = alloca(bufMaxLen);
+    char* bufPtr = (char*)alloca(bufMaxLen);
     XStringBuilder strBuilder(bufPtr, bufMaxLen);
-    strBuilder.AppendChar('(');
-    strBuilder.AppendXString(fileName);
-    strBuilder.AppendChar(':');
-    strBuilder.AppendIntf(16, "%d", fileLineNum);
-    strBuilder.AppendChar(')');
-    strBuilder.AppendChar(' ');
-    strBuilder.AppendXStr(funcName);
-    strBuilder.AppendChar(':');
     strBuilder.AppendXStr(text);
+    strBuilder.AppendCStr(" in ");
+    strBuilder.AppendXStr(fileName);
+    strBuilder.AppendForm(16, "(%d):", fileLineNum);
+    strBuilder.AppendXStr(funcName);
 
     __android_log_write(androidLogPriority, tagPtr, bufPtr);
 }

@@ -21,8 +21,7 @@ using namespace xf;
     const XString& title = XInformation::GetTitle();
     self.mainLabel.stringValue = [NSString stringWithUTF8String:title.GetPtr()];
     
-    XLogger::GetInstance();
-    //x_debugn("!!");
+    x_debugn("!!");
 }
 
 - (void)setRepresentedObject:(id)representedObject {

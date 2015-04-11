@@ -4,6 +4,7 @@
 #define __X_STRING_BUILDER__
 
 #include <stdlib.h>
+#include <stdio.h>
 
 namespace xf {
 
@@ -22,9 +23,9 @@ public:
     inline bool TryAppendCStr(const char* inPtr, size_t inLen)
     {
         size_t nextPos = m_curPos + inLen;
-        if (nextPos >= maxLen)
+        if (nextPos >= m_maxLen)
         {
-            nextPos = maxLen;
+            nextPos = m_maxLen;
         }
 
         size_t copyLen = nextPos - m_curPos;
@@ -34,7 +35,7 @@ public:
         }
 
         const char* srcPtr = inPtr;
-        const char* dstPtr = m_bufPtr + m_curPos;
+        char* dstPtr = m_bufPtr + m_curPos;
         for (size_t i = 0; i != copyLen; ++i)
             dstPtr[i] = srcPtr[i];
         
@@ -59,6 +60,11 @@ public:
         TryAppendChar(inChar);
     }
 
+    inline void AppendCStr(const char* inPtr)
+    {
+        TryAppendCStr(inPtr, strlen(inPtr));
+    }
+
     inline void AppendXStr(const XString& in)
     {
         TryAppendCStr(in.GetPtr(), in.GetLen());
@@ -66,13 +72,13 @@ public:
 
     inline void AppendForm(size_t inMaxLen, const char* fmt, int value)
     {
-        char* inBuf = alloca(inMaxLen);
+        char* inBuf = (char*)alloca(inMaxLen);
         sprintf(inBuf, fmt, value);
         TryAppendCStr(inBuf, strlen(inBuf));
     }
     
     inline const char* GetPtr() { return m_bufPtr; }
-    inline const char* GetLen() { return m_curPos; }
+    inline size_t GetLen() { return m_curPos; }
 
 private:
     char* m_bufPtr;

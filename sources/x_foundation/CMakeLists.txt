@@ -18,7 +18,7 @@ if (ANDROID)
         XAndroidSystem.cpp)
 endif()
 
-if (IOS)
+if (IOS OR MAC)
     set(PLATFORM_SOURCES 
         XNSLogger.mm)
 endif()

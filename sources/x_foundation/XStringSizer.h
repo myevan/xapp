@@ -9,31 +9,36 @@ class XStringSizer
 {
 public:
     XStringSizer()
-    : curPos(0)
+    : m_curPos(0)
     {}
 
-    void AppendChar(const char inChar)
+    inline void AppendChar(const char inChar)
     {
-        curPos++;
+        m_curPos++;
     }
 
-    void AppendXStr(const XString& in)
+    inline void AppendCStr(const char* inPtr)
     {
-        curPos += in.GetLen();
+        m_curPos += strlen(inPtr);
     }
 
-    void AppendIntf(size_t inMaxLen, const char* fmt, int value)
+    inline void AppendXStr(const XString& in)
     {
-        curPos += inMaxLen;
+        m_curPos += in.GetLen();
     }
 
-    size_t GetLen()
+    inline void AppendForm(size_t inMaxLen, const char* fmt, ...)
     {
-        return curPos;
+        m_curPos += inMaxLen;
+    }
+
+    inline size_t GetLen()
+    {
+        return m_curPos;
     }
 
 private:
-    size_t m_maxLen; 
+    size_t m_curPos; 
 };
 
 
