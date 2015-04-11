@@ -10,12 +10,17 @@ set(COMMON_SOURCES
     XString.cpp
     XPath.cpp
     XLogger.cpp
-    XNSLogger.mm
     XInformation.cpp)
 
 if (ANDROID)
     set(PLATFORM_SOURCES 
+        XAndroidLogger.cpp
         XAndroidSystem.cpp)
+endif()
+
+if (IOS)
+    set(PLATFORM_SOURCES 
+        XNSLogger.mm)
 endif()
 
 add_library(x_foundation STATIC ${COMMON_SOURCES} ${PLATFORM_SOURCES})
