@@ -3,9 +3,9 @@
 #ifndef __X_LOGGER__
 #define __X_LOGGER__
 
-namespace xf {
+#include <x_foundation/ILogger.h>
 
-class ILogger;
+namespace xf {
 
 class XLogger
 {

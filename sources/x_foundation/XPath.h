@@ -3,9 +3,9 @@
 #ifndef __X_PATH__
 #define __X_PATH__
 
-namespace xf {
+#include <x_foundation/XString.h>
 
-class XString;
+namespace xf {
 
 class XPath
 {

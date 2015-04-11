@@ -3,9 +3,9 @@
 #ifndef __X_INFORMATION__
 #define __X_INFORMATION__
 
-namespace xf {
+#include <x_foundation/XString.h>
 
-class XString;
+namespace xf {
 
 class XInformation
 {

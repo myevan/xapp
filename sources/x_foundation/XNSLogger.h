@@ -10,7 +10,9 @@ namespace xf {
 class XNSLogger : public ILogger
 {
 public:
-    void Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text) override;
+    virtual ~XNSLogger() {}
+
+    void Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text);
 };
 
 } // end_of_namespace:xf

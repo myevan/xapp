@@ -18,10 +18,11 @@ using namespace xf;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    const char* title = XInformation::GetTitle();
-    self.mainLabel.stringValue = [NSString stringWithUTF8String:title];
+    const XString& title = XInformation::GetTitle();
+    self.mainLabel.stringValue = [NSString stringWithUTF8String:title.GetPtr()];
     
-    x_debugn("!!");
+    XLogger::GetInstance();
+    //x_debugn("!!");
 }
 
 - (void)setRepresentedObject:(id)representedObject {
