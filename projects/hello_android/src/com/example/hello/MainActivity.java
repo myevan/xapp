@@ -2,7 +2,7 @@ package com.example.hello;
 
 import x.framework.XSystem;
 import x.framework.XBaseConfig;
-import x.framework.XLoggerManager;
+import x.framework.XDefaultLogger;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
 
-        XLoggerManager.Printn("test");
+        XDefaultLogger.Debugn("test");
 
         TextView  tv = new TextView(this);
         tv.setText(XBaseConfig.GetTitle() + ":" + XSystem.GetABIName());
