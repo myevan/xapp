@@ -10,6 +10,7 @@
 
 #include <x_foundation/XBaseConfig.h>
 #include <x_foundation/XLogMacros.h>
+#include <x_foundation/XSystem.h>
 
 using namespace xf;
 
@@ -23,6 +24,8 @@ using namespace xf;
     self.mainLabel.stringValue = [NSString stringWithUTF8String:title.GetPtr()];
     
     x_debugn("!!");
+    
+    
 }
 
 - (void)setRepresentedObject:(id)representedObject {

@@ -3,9 +3,6 @@
 #ifndef __X_STRING__
 #define __X_STRING__
 
-#include <stdlib.h>
-#include <string.h>
-
 namespace xf {
 
 class XString

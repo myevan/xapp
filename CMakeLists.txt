@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 project(framework)
 
-include_directories("${PROJECT_SOURCE_DIR}/sources")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmakes")
+
+include(cotire)
+
+include_directories("${CMAKE_SOURCE_DIR}/sources")
 
 if (POSIX)
     add_definitions("-DPOSIX=1")

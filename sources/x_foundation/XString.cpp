@@ -1,3 +1,5 @@
+#include "StdAfx.h"
+
 #include <x_foundation/XString.h>
 
 namespace xf {

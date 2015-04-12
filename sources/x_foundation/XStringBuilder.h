@@ -3,9 +3,6 @@
 #ifndef __X_STRING_BUILDER__
 #define __X_STRING_BUILDER__
 
-#include <stdlib.h>
-#include <stdio.h>
-
 namespace xf {
 
 class XStringBuilder

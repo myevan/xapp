@@ -1,8 +1,8 @@
+#include "StdAfx.h"
+
 #include <x_foundation/ns/XLogger.h>
 
 #include <x_foundation/XPath.h>
-
-#import "Foundation/Foundation.h"
 
 namespace xf { namespace ns {
 

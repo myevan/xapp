@@ -1,3 +1,5 @@
+#include "StdAfx.h"
+
 #include <x_foundation/XLoggerManager.h>
 #include <x_foundation/XOSDefine.h>
 
