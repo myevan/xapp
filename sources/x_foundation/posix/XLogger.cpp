@@ -4,6 +4,16 @@
 
 #include <stdio.h>
 
+namespace xf {
+
+ILogger& XDefaultLogger::GetDefaultLogger()
+{
+    static posix::XLogger s_logger;
+    return s_logger;
+}
+
+} // end_of_namespace:xf
+
 namespace xf { namespace posix {
 
 void XLogger::Printn(XLogType logType, const XString& text, const XString& filePath, int fileLineNum, const XString& funcName)

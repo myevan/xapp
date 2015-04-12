@@ -11,20 +11,22 @@ set(COMMON_SOURCES
     StdAfx.cpp
     XString.cpp
     XPath.cpp
-    XLoggerManager.cpp
     XBaseConfig.cpp)
 
 if (POSIX)
     set(PLATFORM_SOURCES 
-        posix/XLogger.cpp)
+        posix/XLogger.cpp
+        posix/XDefaultLogger.cpp)
 elseif (ANDROID)
     set(PLATFORM_SOURCES 
         android/XSystem.cpp
-        android/XLogger.cpp)
+        android/XLogger.cpp
+        posix/XDefaultLogger.cpp)
 elseif (IOS OR MAC)
     set(PLATFORM_SOURCES 
         ns/XSystem.mm
-        ns/XLogger.mm)
+        ns/XLogger.mm
+        ns/XDefaultLogger.mm)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
