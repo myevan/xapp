@@ -1,9 +1,9 @@
 set(PUBLIC_HEADERS
     XString.h
     XLogType.h
-    ILogger.h
-    XLogger.h
     XLogMacros.h
+    ILogger.h
+    XLoggerManager.h
     XBaseConfig.h)
 
 set(COMMON_SOURCES

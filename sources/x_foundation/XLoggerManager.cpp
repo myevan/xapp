@@ -1,4 +1,4 @@
-#include <x_foundation/XLogger.h>
+#include <x_foundation/XLoggerManager.h>
 #include <x_foundation/XOSDefine.h>
 
 #if X_TARGET_OS_GROUP == X_OS_IOS_GROUP
@@ -13,7 +13,7 @@
 
 namespace xf {
 
-ILogger& XLogger::GetInstance()
+ILogger& XLoggerManager::GetDefaultLogger()
 {
 #if X_TARGET_OS_GROUP == X_OS_IOS_GROUP
     static XNSLogger s_logger;

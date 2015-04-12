@@ -1,16 +1,16 @@
 #pragma once
 
-#ifndef __X_LOGGER__
-#define __X_LOGGER__
+#ifndef __X_LOGGER_MANAGER__
+#define __X_LOGGER_MANAGER__
 
 #include <x_foundation/ILogger.h>
 
 namespace xf {
 
-class XLogger
+class XLoggerManager
 {
 public:
-    static ILogger& GetInstance();
+    static ILogger& GetDefaultLogger();
 };
 
 } // end_of_namespace:xf
