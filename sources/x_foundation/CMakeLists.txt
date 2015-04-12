@@ -19,6 +19,7 @@ if (POSIX)
         posix/XDefaultLogger.cpp)
 elseif (ANDROID)
     set(PLATFORM_SOURCES 
+        android/XAssetBinary.cpp
         android/XSystem.cpp
         android/XLogger.cpp
         android/XDefaultLogger.cpp)

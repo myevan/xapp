@@ -13,7 +13,7 @@ if (ANDROID)
 
     add_library(x_interface SHARED ${COMMON_SOURCES} ${PLATFORM_SOURCES})
 
-    target_link_libraries(x_interface x_foundation log)
+    target_link_libraries(x_interface x_foundation log android)
     set_target_properties(x_interface PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "StdAfx.h")
     cotire(x_interface)
 
