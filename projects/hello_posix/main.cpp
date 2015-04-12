@@ -1,11 +1,12 @@
 #include <x_foundation/XLogMacros.h>
-#include <x_foundation/XInformation.h>
+#include <x_foundation/XBaseConfig.h>
 
 using namespace xf;
 
 int main(int argc, const char** argv)
 {
-    const XString& title = XInformation::GetTitle();
+    XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
+    const XString& title = baseConfig.GetTitle();
     x_debugn(title.GetPtr());
     return 0;
 }

@@ -1,9 +1,15 @@
-#include <x_foundation/XInformation.h>
+#include <x_foundation/XBaseConfig.h>
 #include <x_foundation/XString.h>
 
 namespace xf {
 
-const XString& XInformation::GetTitle()
+XBaseConfig& XBaseConfig::GetBaseConfig()
+{
+    static XBaseConfig s_baseConfig;
+    return s_baseConfig;
+}
+
+const XString& XBaseConfig::GetTitle() const
 {
     static XString s_title("XApplication");
     return s_title;
