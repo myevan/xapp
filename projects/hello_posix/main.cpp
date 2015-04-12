@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include <x_foundation/XLogMacros.h>
 #include <x_foundation/XBaseConfig.h>
 
