@@ -13,7 +13,7 @@ void XLogger::Printn(XLogType logType, const XString& filePath, int fileLineNum,
     const char* fileNamePtr = fileName.GetPtr();
     const char* funcNamePtr = funcName.GetPtr();
     const char* textPtr = text.GetPtr();
-    NSLog(@"(%s:%d) %s:%s", fileNamePtr, fileLineNum, funcNamePtr, textPtr);
+    NSLog(@"%s in (%s:%d) %s", textPtr, fileNamePtr, fileLineNum, funcNamePtr);
 }
 
 } } // end_of_namespace:xf.ns

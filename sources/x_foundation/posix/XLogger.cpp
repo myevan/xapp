@@ -13,7 +13,7 @@ void XLogger::Printn(XLogType logType, const XString& filePath, int fileLineNum,
     const char* fileNamePtr = fileName.GetPtr();
     const char* funcNamePtr = funcName.GetPtr();
     const char* textPtr = text.GetPtr();
-    fprintf(stdout, "%s(%d):%s:%s\n", fileNamePtr, fileLineNum, funcNamePtr, textPtr);
+    fprintf(stdout, "%s in %s(%d):%s\n", textPtr, fileNamePtr, fileLineNum, funcNamePtr);
 }
 
 } } // end_of_namespace:xf.posix
