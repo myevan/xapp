@@ -1,6 +1,6 @@
 if (ANDROID)
     set(PLATFORM_SOURCES 
-        android/XJNILoggerManager.cpp
+        android/XJNIDefaultLogger.cpp
         android/XJNIBaseConfig.cpp
         android/XJNISystem.cpp)
 
