@@ -3,7 +3,7 @@ set(PUBLIC_HEADERS
     XLogType.h
     XLogMacros.h
     ILogger.h
-    XLoggerManager.h
+    XDefaultLogger.h
     XSystem.h
     XBaseConfig.h)
 
