@@ -2,9 +2,9 @@ d
 l
 __builds
 __platforms
+projects/*_android/bin/*
+projects/*_android/gen/*
+projects/*_android/libs/*
 project.xcworkspace
-projects/android_project/bin/*
-projects/android_project/gen/*
-projects/android_project/libs/*
 *.xcuserdatad
 *.swp
