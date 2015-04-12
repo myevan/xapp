@@ -4,14 +4,14 @@ set(PUBLIC_HEADERS
     ILogger.h
     XLogger.h
     XLogMacros.h
-    XInformation.h)
+    XBaseConfig.h)
 
 set(COMMON_SOURCES
     XString.cpp
     XPath.cpp
     XLogger.cpp
     XPosixLogger.cpp
-    XInformation.cpp)
+    XBaseConfig.cpp)
 
 if (ANDROID)
     set(PLATFORM_SOURCES 
