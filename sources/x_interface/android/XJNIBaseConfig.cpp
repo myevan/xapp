@@ -1,3 +1,5 @@
+#include "StdAfx.h"
+
 #include <x_interface/android/XJNIMacros.h>
 
 #include <x_foundation/XBaseConfig.h>

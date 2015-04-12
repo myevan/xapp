@@ -21,7 +21,7 @@ elseif (ANDROID)
     set(PLATFORM_SOURCES 
         android/XSystem.cpp
         android/XLogger.cpp
-        posix/XDefaultLogger.cpp)
+        android/XDefaultLogger.cpp)
 elseif (IOS OR MAC)
     set(PLATFORM_SOURCES 
         ns/XSystem.mm

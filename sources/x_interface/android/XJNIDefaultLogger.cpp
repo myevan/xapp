@@ -1,6 +1,8 @@
+#include "StdAfx.h"
+
 #include <x_interface/android/XJNIMacros.h>
 
-#include <x_foundation/XLoggerManager.h>
+#include <x_foundation/XDefaultLogger.h>
 
 using namespace xf;
 
@@ -13,7 +15,7 @@ JNIEXPORT void JNICALL X_JNI_FUNCTION(XDefaultLogger, Debugn)(JNIEnv* env, jobje
     const char* cTextPtr = env->GetStringUTFChars(jText, NULL);
     const char* cFilePathPtr = env->GetStringUTFChars(jFilePath, NULL);
     const char* cFuncNamePtr = env->GetStringUTFChars(jFuncName, NULL);
-    XLoggerManager::GetDefaultLogger().Printn(X_LOG_DEBUG, cTextPtr, cFilePathPtr, jFileLineNum, cFuncNamePtr);
+    XDefaultLogger::GetDefaultLogger().Printn(X_LOG_DEBUG, cTextPtr, cFilePathPtr, jFileLineNum, cFuncNamePtr);
     env->ReleaseStringUTFChars(jText, cFuncNamePtr);
     env->ReleaseStringUTFChars(jText, cFilePathPtr);
     env->ReleaseStringUTFChars(jText, cTextPtr);
