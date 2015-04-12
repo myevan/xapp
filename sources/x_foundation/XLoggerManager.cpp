@@ -2,13 +2,13 @@
 #include <x_foundation/XOSDefine.h>
 
 #if X_TARGET_OS_GROUP == X_OS_IOS_GROUP
-#   include <x_foundation/XNSLogger.h>
+#   include <x_foundation/ns/XLogger.h>
 #elif X_TARGET_OS_GROUP == X_OS_OSX_GROUP
-#   include <x_foundation/XNSLogger.h>
+#   include <x_foundation/ns/XLogger.h>
 #elif X_TARGET_OS_GROUP == X_OS_ANDROID_GROUP
-#   include <x_foundation/XAndroidLogger.h>
+#   include <x_foundation/android/XLogger.h>
 #else
-#   include <x_foundation/XPosixLogger.h>
+#   include <x_foundation/posix/XLogger.h>
 #endif
 
 namespace xf {
@@ -16,13 +16,13 @@ namespace xf {
 ILogger& XLoggerManager::GetDefaultLogger()
 {
 #if X_TARGET_OS_GROUP == X_OS_IOS_GROUP
-    static XNSLogger s_logger;
+    static ns::XLogger s_logger;
 #elif X_TARGET_OS_GROUP == X_OS_OSX_GROUP
-    static XNSLogger s_logger;
+    static ns::XLogger s_logger;
 #elif X_TARGET_OS_GROUP == X_OS_ANDROID_GROUP
-    static XAndroidLogger s_logger;
+    static android::XLogger s_logger;
 #else
-    static XPosixLogger s_logger;
+    static posix::XLogger s_logger;
 #endif
     return s_logger;
 }

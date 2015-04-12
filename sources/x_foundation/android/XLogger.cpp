@@ -1,4 +1,4 @@
-#include <x_foundation/XAndroidLogger.h>
+#include <x_foundation/android/XLogger.h>
 #include <x_foundation/XPath.h>
 #include <x_foundation/XString.h>
 #include <x_foundation/XStringSizer.h>
@@ -7,7 +7,7 @@
 
 #include <android/log.h>
 
-namespace xf {
+namespace xf { namespace android {
 
 static android_LogPriority X_LOG_TYPE_TO_ANDROID_LOG_PRIORITY[X_LOG_TYPE_COUNT] = 
 {
@@ -18,7 +18,7 @@ static android_LogPriority X_LOG_TYPE_TO_ANDROID_LOG_PRIORITY[X_LOG_TYPE_COUNT] 
     ANDROID_LOG_DEBUG,
 };
 
-void XAndroidLogger::Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text)
+void XLogger::Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text)
 {
     android_LogPriority androidLogPriority = X_LOG_TYPE_TO_ANDROID_LOG_PRIORITY[logType];
 
@@ -47,4 +47,4 @@ void XAndroidLogger::Printn(XLogType logType, const XString& filePath, int fileL
     __android_log_write(androidLogPriority, titlePtr, bufPtr);
 }
 
-} // end_of_namespace:xf
+} } // end_of_namespace:xf.android

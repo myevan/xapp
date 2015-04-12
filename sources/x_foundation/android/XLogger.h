@@ -1,18 +1,18 @@
 #pragma once
 
-#ifndef __X_ANDROID_LOGGER__
-#define __X_ANDROID_LOGGER__
+#ifndef __ANDROID_X_LOGGER__
+#define __ANDROID_X_LOGGER__
 
 #include <x_foundation/ILogger.h>
 
-namespace xf {
+namespace xf { namespace android {
 
-class XAndroidLogger : public ILogger
+class XLogger : public ILogger
 {
 public:
     void Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text) override;
 };
 
-} // end_of_namespace:xf
+} } // end_of_namespace:xf.android
 
 #endif

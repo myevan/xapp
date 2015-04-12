@@ -1,6 +1,6 @@
 #include <x_interface/XJNIMacros.h>
 #include <x_foundation/XLogMacros.h>
-#include <x_foundation/XAndroidSystem.h>
+#include <x_foundation/android/XSystem.h>
 
 #include <jni.h>
 
@@ -13,6 +13,6 @@ extern "C" {
 JNIEXPORT jstring JNICALL X_JNI_FUNCTION(XSystem, GetABIName)(JNIEnv* env, jobject thiz)
 {
     x_debugn("test");
-    const char* abiName = XAndroidSystem::GetABIName();
+    const char* abiName = android::XSystem::GetABIName();
     return (env)->NewStringUTF(abiName);
 }

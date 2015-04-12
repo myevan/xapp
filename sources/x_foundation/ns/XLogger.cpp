@@ -1,11 +1,12 @@
-#include <x_foundation/XNSLogger.h>
+#include <x_foundation/ns/XLogger.h>
+
 #include <x_foundation/XPath.h>
 
 #import "Foundation/Foundation.h"
 
-namespace xf {
+namespace xf { namespace ns {
 
-void XNSLogger::Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text)
+void XLogger::Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text)
 {
     XString fileName = XPath::GetPathLeaf(filePath);
 
@@ -15,4 +16,4 @@ void XNSLogger::Printn(XLogType logType, const XString& filePath, int fileLineNu
     NSLog(@"(%s:%d) %s:%s", fileNamePtr, fileLineNum, funcNamePtr, textPtr);
 }
 
-} // end_of_namespace:xf
+} } // end_of_namespace:xf.ns

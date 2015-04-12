@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef __X_ANDROID_SYSTEM__
-#define __X_ANDROID_SYSTEM__
+#ifndef __ANDROID_X_SYSTEM__
+#define __ANDROID_X_SYSTEM__
 
-namespace xf { 
+namespace xf { namespace android {
 
 //! @brief [kr] 안드로이드 시스템
-class XAndroidSystem
+class XSystem
 {
 public:
     //! @brief  [kr] ABI(Application Binary Interface) 이름 얻기
@@ -14,6 +14,6 @@ public:
     static const char* GetABIName();
 };
 
-} // end_of_namespace:xf
+} } // end_of_namespace:xf.android
 
 #endif

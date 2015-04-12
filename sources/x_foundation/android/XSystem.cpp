@@ -1,4 +1,4 @@
-#include <x_foundation/XAndroidSystem.h>
+#include <x_foundation/android/XSystem.h>
 
 #include <jni.h>
 
@@ -34,11 +34,11 @@
 #   define ABI_NAME "unknown";
 #endif
 
-namespace xf { 
+namespace xf { namespace android {
 
-const char* XAndroidSystem::GetABIName()
+const char* XSystem::GetABIName()
 {
     return ABI_NAME
 }
 
-} // end_of_namespace:xf
+} } // end_of_namespace:xf.android

@@ -9,19 +9,19 @@ set(PUBLIC_HEADERS
 set(COMMON_SOURCES
     XString.cpp
     XPath.cpp
-    XPosixLogger.cpp
     XLoggerManager.cpp
     XBaseConfig.cpp)
 
-if (ANDROID)
+if (POSIX)
     set(PLATFORM_SOURCES 
-        XAndroidLogger.cpp
-        XAndroidSystem.cpp)
-endif()
-
-if (IOS OR MAC)
+        posix/XLogger.cpp)
+elseif (ANDROID)
     set(PLATFORM_SOURCES 
-        XNSLogger.mm)
+        android/XSystem.cpp
+        android/XLogger.cpp)
+elseif (IOS OR MAC)
+    set(PLATFORM_SOURCES 
+        ns/XLogger.mm)
 endif()
 
 add_library(x_foundation STATIC ${COMMON_SOURCES} ${PLATFORM_SOURCES})

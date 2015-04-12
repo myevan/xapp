@@ -1,20 +1,20 @@
 #pragma once
 
-#ifndef __X_NS_LOGGER__
-#define __X_NS_LOGGER__
+#ifndef __POSIX_X_LOGGER__
+#define __POSIX_X_LOGGER__
 
 #include <x_foundation/ILogger.h>
 
-namespace xf {
+namespace xf { namespace posix {
 
-class XNSLogger : public ILogger
+class XLogger : public ILogger
 {
 public:
-    virtual ~XNSLogger() {}
+    virtual ~XLogger() {}
 
     void Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text);
 };
 
-} // end_of_namespace:xf
+} } // end_of_namespace:xf.posix
 
 #endif
