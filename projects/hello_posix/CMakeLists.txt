@@ -4,7 +4,7 @@ project(hello)
 
 set(SOURCES
     StdAfx.cpp
-    main.cpp)
+    Main.cpp)
 
 set(LIBRARIES
     x_foundation)
