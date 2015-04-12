@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#include <x_foundation/XInformation.h>
+#include <x_foundation/XBaseConfig.h>
 #include <x_foundation/XLogMacros.h>
 
 using namespace xf;
@@ -18,7 +18,8 @@ using namespace xf;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    const XString& title = XInformation::GetTitle();
+    XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
+    const XString& title = baseConfig.GetTitle();
     self.mainLabel.stringValue = [NSString stringWithUTF8String:title.GetPtr()];
     
     x_debugn("!!");
