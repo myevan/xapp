@@ -1,7 +1,8 @@
 package com.example.hello;
 
-import x.framework.XBaseConfig;
 import x.framework.XSystem;
+import x.framework.XBaseConfig;
+import x.framework.XLoggerManager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,7 +15,8 @@ public class MainActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.main);
+
+        XLoggerManager.Printn("test");
 
         TextView  tv = new TextView(this);
         tv.setText(XBaseConfig.GetTitle() + ":" + XSystem.GetABIName());

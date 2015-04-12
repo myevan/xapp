@@ -1,7 +1,8 @@
 if (ANDROID)
     set(PLATFORM_SOURCES 
-        XJNIBaseConfig.cpp
-        XJNISystem.cpp)
+        android/XJNILoggerManager.cpp
+        android/XJNIBaseConfig.cpp
+        android/XJNISystem.cpp)
 
     add_definitions(
         -DJNI_PACKAGE_NAME=${JNI_PACKAGE_NAME} 

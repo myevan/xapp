@@ -1,7 +1,6 @@
-#include <x_interface/XJNIMacros.h>
-#include <x_foundation/XBaseConfig.h>
+#include <x_interface/android/XJNIMacros.h>
 
-#include <jni.h>
+#include <x_foundation/XBaseConfig.h>
 
 using namespace xf;
 
