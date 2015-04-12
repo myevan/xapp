@@ -4,6 +4,8 @@
 #define __X_OS_DEFINE__
 
 #define X_OS_POSIX_GROUP        0x1000
+#define X_OS_POSIX_WIN_32       0x1011
+#define X_OS_POSIX_OSX          0x1020
 #define X_OS_POSIX_UNKNOWN      0x10FF
 #define X_OS_WIN_GROUP          0x1100
 #define X_OS_WIN_32             0x1101
@@ -22,7 +24,21 @@
 #define X_OS_UNIX_GROUP         0x1400
 #define X_OS_UNIX_UNKNOWN       0x14FF
 
-#ifdef _WIN32
+#if POSIX
+#   if defined(_WIN32)
+#       define X_TARGET_OS_GROUP        X_OS_POSIX_GROUP
+#       define X_TARGET_OS_TYPE         X_OS_POSIX_WIN_32
+#   elif defined(_WIN64)
+#       define X_TARGET_OS_GROUP        X_OS_POSIX_GROUP
+#       define X_TARGET_OS_TYPE         X_OS_POSIX_WIN_64
+#   elif defined(__APPLE__)
+#       define X_TARGET_OS_GROUP        X_OS_POSIX_GROUP
+#       define X_TARGET_OS_TYPE         X_OS_POSIX_OSX
+#   else
+#       define X_TARGET_OS_GROUP        X_OS_POSIX_GROUP
+#       define X_TARGET_OS_TYPE         X_OS_POSIX_UNKNOWN
+#   endif
+#elif _WIN32
 #   ifdef _WIN64
 #       define X_TARGET_OS_GROUP        X_OS_WIN_GROUP
 #       define X_TARGET_OS_TYPE         X_OS_WIN_64

@@ -10,6 +10,7 @@ set(COMMON_SOURCES
     XString.cpp
     XPath.cpp
     XLogger.cpp
+    XPosixLogger.cpp
     XInformation.cpp)
 
 if (ANDROID)

@@ -7,6 +7,8 @@
 #   include <x_foundation/XNSLogger.h>
 #elif X_TARGET_OS_GROUP == X_OS_ANDROID_GROUP
 #   include <x_foundation/XAndroidLogger.h>
+#else
+#   include <x_foundation/XPosixLogger.h>
 #endif
 
 namespace xf {
@@ -19,6 +21,8 @@ ILogger& XLogger::GetInstance()
     static XNSLogger s_logger;
 #elif X_TARGET_OS_GROUP == X_OS_ANDROID_GROUP
     static XAndroidLogger s_logger;
+#else
+    static XPosixLogger s_logger;
 #endif
     return s_logger;
 }
