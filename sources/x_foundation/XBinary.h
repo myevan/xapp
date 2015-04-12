@@ -8,6 +8,9 @@ namespace xf {
 class XBinary
 {
 public:
+    virtual ~XBinary() 
+    {}
+
     inline XBinary()
     : m_binPtr(NULL)
     , m_binLen(0)

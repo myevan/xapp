@@ -8,9 +8,11 @@
 
 #include <android/asset_manager.h>
 
+#include <x_foundation/XLogMacros.h>
+
 namespace xf { namespace android {
 
-class XAssetBinary : XBinary
+class XAssetBinary : public XBinary
 {
 public:
     static void BindAssetManager(AAssetManager* assetManager)
@@ -33,7 +35,6 @@ public:
         XAssetBinary* newAssetBinPtr = AllocAssetBinary(newAssetSize);
         if (newAssetBinPtr != NULL)
         {
-            newAssetBinPtr->IncRef();
             newAssetBinPtr->LoadAsset(newAssetPtr);
         }
         AAsset_close(newAssetPtr);
@@ -68,7 +69,11 @@ private:
 public:
     virtual ~XAssetBinary()
     {
-        free(m_binPtr);
+        if (m_binPtr != NULL)
+        {
+            x_debugn("free");
+            free(m_binPtr);
+        }
     }
 
 private:
@@ -81,6 +86,7 @@ private:
     : m_binLen(binLen)
     , m_binPtr((unsigned char*)malloc(m_binLen))
     {
+        x_debugn("alloc");
     }
 
     void LoadAsset(AAsset* assetPtr)

@@ -7,6 +7,8 @@
 
 #include <android/asset_manager_jni.h> 
 
+#include <x_foundation/XLogMacros.h>
+
 using namespace xf;
 
 extern "C" {
@@ -24,5 +26,17 @@ JNIEXPORT void JNICALL X_JNI_FUNCTION(XSystem, BindAssetManager)(JNIEnv* env, jo
 {
     AAssetManager* cAssetManager = AAssetManager_fromJava(env, jAssetManager);
     android::XAssetBinary::BindAssetManager(cAssetManager);
+
+    android::XAssetBinary* testBinPtr = android::XAssetBinary::LoadAssetBinary("test.txt");
+    if (testBinPtr == NULL)
+    {
+        x_debugn("NOT_FOUND_TEXT");
+    }
+    else
+    {
+        x_debugn("FOUND_TEXT");
+        testBinPtr->IncRef();
+        testBinPtr->DecRef();
+    }
 }
 

@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import android.content.res.AssetManager;
+
 public class MainActivity extends Activity
 {
     /** Called when the activity is first created. */
@@ -17,6 +19,13 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
 
         XDefaultLogger.Debugn("test");
+
+        XDefaultLogger.Debugn("bind");
+
+        AssetManager assetManager = getAssets();
+        XSystem.BindAssetManager(assetManager);
+
+        XDefaultLogger.Debugn("show");
 
         TextView  tv = new TextView(this);
         tv.setText(XBaseConfig.GetTitle() + ":" + XSystem.GetABIName());
