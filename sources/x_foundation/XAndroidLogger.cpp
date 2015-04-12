@@ -3,7 +3,7 @@
 #include <x_foundation/XString.h>
 #include <x_foundation/XStringSizer.h>
 #include <x_foundation/XStringBuilder.h>
-#include <x_foundation/XInformation.h>
+#include <x_foundation/XBaseConfig.h>
 
 #include <android/log.h>
 
@@ -22,8 +22,9 @@ void XAndroidLogger::Printn(XLogType logType, const XString& filePath, int fileL
 {
     android_LogPriority androidLogPriority = X_LOG_TYPE_TO_ANDROID_LOG_PRIORITY[logType];
 
-    const XString& tag = XInformation::GetTitle();
-    const char* tagPtr = tag.GetPtr();
+    const XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
+    const XString& title = baseConfig.GetTitle();
+    const char* titlePtr = title.GetPtr();
 
     XString fileName = XPath::GetPathLeaf(filePath);
 
@@ -43,7 +44,7 @@ void XAndroidLogger::Printn(XLogType logType, const XString& filePath, int fileL
     strBuilder.AppendForm(16, "(%d):", fileLineNum);
     strBuilder.AppendXStr(funcName);
 
-    __android_log_write(androidLogPriority, tagPtr, bufPtr);
+    __android_log_write(androidLogPriority, titlePtr, bufPtr);
 }
 
 } // end_of_namespace:xf

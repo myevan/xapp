@@ -1,5 +1,7 @@
 package com.example.hello;
 
+import com.example.x.framework.*;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -11,17 +13,10 @@ public class MainActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        // setContentView(R.layout.main);
 
         TextView  tv = new TextView(this);
-        tv.setText(XInformationGetTitle() + ":" + XAndroidSystemGetABIName());
+        tv.setText(XBaseConfig.GetTitle() + ":" + XAndroidSystem.GetABIName());
         setContentView(tv);
-    }
-
-    public static native String XAndroidSystemGetABIName();
-    public static native String XInformationGetTitle();
-
-    static {
-        System.loadLibrary("x_interface");
     }
 }
