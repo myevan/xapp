@@ -43,10 +43,10 @@ public:
         return retIndex;
     }
     
-    inline XString GetUnsafeRight(size_t index) const
+    inline XString GetSliceRight(size_t index) const
     {
         XString retSlice;
-        if (!TryGetUnsafeRight(index, retSlice))
+        if (!TryGetSliceRight(index, retSlice))
             return EMPTY;
 
         return retSlice;
@@ -76,7 +76,7 @@ public:
         return true;
     }
 
-    inline bool TryGetUnsafeRight(size_t index, XString& outSlice) const
+    inline bool TryGetSliceRight(size_t index, XString& outSlice) const
     {
         if (index >= m_strLen)
             return false;
