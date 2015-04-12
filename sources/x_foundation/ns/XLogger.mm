@@ -6,13 +6,13 @@
 
 namespace xf { namespace ns {
 
-void XLogger::Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text)
+void XLogger::Printn(XLogType logType, const XString& text, const XString& filePath, int fileLineNum, const XString& funcName)
 {
     XString fileName = XPath::GetPathLeaf(filePath);
 
+    const char* textPtr = text.GetPtr();
     const char* fileNamePtr = fileName.GetPtr();
     const char* funcNamePtr = funcName.GetPtr();
-    const char* textPtr = text.GetPtr();
     NSLog(@"%s in (%s:%d) %s", textPtr, fileNamePtr, fileLineNum, funcNamePtr);
 }
 

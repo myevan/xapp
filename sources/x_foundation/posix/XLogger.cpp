@@ -6,13 +6,13 @@
 
 namespace xf { namespace posix {
 
-void XLogger::Printn(XLogType logType, const XString& filePath, int fileLineNum, const XString& funcName, const XString& text)
+void XLogger::Printn(XLogType logType, const XString& text, const XString& filePath, int fileLineNum, const XString& funcName)
 {
     XString fileName = XPath::GetPathLeaf(filePath);
 
+    const char* textPtr = text.GetPtr();
     const char* fileNamePtr = fileName.GetPtr();
     const char* funcNamePtr = funcName.GetPtr();
-    const char* textPtr = text.GetPtr();
     fprintf(stdout, "%s in %s(%d):%s\n", textPtr, fileNamePtr, fileLineNum, funcNamePtr);
 }
 

@@ -5,6 +5,6 @@
 
 #include <x_foundation/XLoggerManager.h>
 
-#define x_debugn(text) XLoggerManager::GetDefaultLogger().Printn(X_LOG_DEBUG, __FILE__, __LINE__, __FUNCTION__, text)
+#define x_debugn(text) XLoggerManager::GetDefaultLogger().Printn(X_LOG_DEBUG, text, __FILE__, __LINE__, __FUNCTION__)
 
 #endif

@@ -9,13 +9,13 @@ public class XDefaultLogger
         StackTraceElement[] stackTraces = new Throwable().getStackTrace();
         StackTraceElement stackTrace = stackTraces[1];
         Debugn(
+            text,
             stackTrace.getClassName(), 
             stackTrace.getLineNumber(), 
-            stackTrace.getMethodName(),
-            text);
+            stackTrace.getMethodName());
     }
 
-    public static native void Debugn(String filePath, int lineIndex, String funcName, String text);
+    public static native void Debugn(String text, String filePath, int lineIndex, String funcName);
 
     static {
         System.loadLibrary("x_interface");
