@@ -2,6 +2,7 @@ d
 l
 __builds
 __platforms
+projects/*_android/local.properties
 projects/*_android/bin/*
 projects/*_android/gen/*
 projects/*_android/libs/*
