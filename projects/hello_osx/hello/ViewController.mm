@@ -8,9 +8,11 @@
 
 #import "ViewController.h"
 
-#include <x_foundation/XBaseConfig.h>
-#include <x_foundation/XLogMacros.h>
-#include <x_foundation/XSystem.h>
+#import <x_foundation/XBaseConfig.h>
+#import <x_foundation/XLogMacros.h>
+#import <x_foundation/XSystem.h>
+
+#import <string>
 
 using namespace xf;
 
@@ -25,7 +27,11 @@ using namespace xf;
     
     x_debugn("!!");
     
-    
+    std::string testAbsPath;
+    if (XSystem::GetSystem().TryGetResourceFileAbsPath("", "test.txt", testAbsPath))
+        x_debugn("found_test");
+    else
+        x_debugn("not_found_test");
 }
 
 - (void)setRepresentedObject:(id)representedObject {

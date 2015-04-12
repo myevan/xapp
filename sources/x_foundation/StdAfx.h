@@ -8,8 +8,14 @@
 
 #include <string>
 
+#include <x_foundation/XOSDefine.h>
+
 #ifdef __OBJC__
-#   import <Foundation/Foundation.h>
+#   if X_TARGET_OS_GROUP == X_OS_IOS_GROUP
+#       import <Foundation/Foundation.h>
+#   elif X_TARGET_OS_GROUP == X_OS_OSX_GROUP
+#       import <Cocoa/Cocoa.h>
+#   endif
 #endif
 
 #endif

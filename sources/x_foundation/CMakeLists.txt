@@ -12,7 +12,6 @@ set(COMMON_SOURCES
     XString.cpp
     XPath.cpp
     XLoggerManager.cpp
-    XSystem.cpp
     XBaseConfig.cpp)
 
 if (POSIX)

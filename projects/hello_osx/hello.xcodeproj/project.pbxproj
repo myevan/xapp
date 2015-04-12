@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		471D1BCA1ADA6F2700828471 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 471D1BC91ADA6F2700828471 /* test.txt */; };
 		47B7069A1AD9792F00CC92AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B706991AD9792F00CC92AA /* AppDelegate.m */; };
 		47B7069C1AD9792F00CC92AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B7069B1AD9792F00CC92AA /* main.m */; };
 		47B7069F1AD9792F00CC92AA /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 47B7069E1AD9792F00CC92AA /* ViewController.mm */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		471D1BC91ADA6F2700828471 /* test.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = test.txt; path = ../hello_data/test.txt; sourceTree = "<group>"; };
 		47B706931AD9792F00CC92AA /* hello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47B706971AD9792F00CC92AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47B706981AD9792F00CC92AA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		47B7068A1AD9792F00CC92AA = {
 			isa = PBXGroup;
 			children = (
+				471D1BC91ADA6F2700828471 /* test.txt */,
 				47EFA8BF1AD97C5600A2EE73 /* libx_framework.a */,
 				47B706951AD9792F00CC92AA /* hello */,
 				47B706AC1AD9792F00CC92AA /* helloTests */,
@@ -200,6 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				471D1BCA1ADA6F2700828471 /* test.txt in Resources */,
 				47B706A11AD9792F00CC92AA /* Images.xcassets in Resources */,
 				47B706A41AD9792F00CC92AA /* Main.storyboard in Resources */,
 			);

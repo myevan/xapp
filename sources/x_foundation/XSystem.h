@@ -5,6 +5,8 @@
 
 #include <x_foundation/XString.h>
 
+#include <string>
+
 namespace xf { 
 
 class XSystem
