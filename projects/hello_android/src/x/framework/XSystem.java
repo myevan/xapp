@@ -1,6 +1,6 @@
 package x.framework;
 
-public class XAndroidSystem
+public class XSystem
 {
     public static native String GetABIName();
 

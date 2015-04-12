@@ -1,7 +1,7 @@
 if (ANDROID)
     set(PLATFORM_SOURCES 
         XJNIBaseConfig.cpp
-        XJNIAndroidSystem.cpp)
+        XJNISystem.cpp)
 
     add_definitions(
         -DJNI_PACKAGE_NAME=${JNI_PACKAGE_NAME} 

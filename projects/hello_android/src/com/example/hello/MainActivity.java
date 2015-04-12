@@ -1,7 +1,7 @@
 package com.example.hello;
 
 import x.framework.XBaseConfig;
-import x.framework.XAndroidSystem;
+import x.framework.XSystem;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ public class MainActivity extends Activity
         // setContentView(R.layout.main);
 
         TextView  tv = new TextView(this);
-        tv.setText(XBaseConfig.GetTitle() + ":" + XAndroidSystem.GetABIName());
+        tv.setText(XBaseConfig.GetTitle() + ":" + XSystem.GetABIName());
         setContentView(tv);
     }
 }
