@@ -9,8 +9,8 @@ set(PUBLIC_HEADERS
 set(COMMON_SOURCES
     XString.cpp
     XPath.cpp
-    XLogger.cpp
     XPosixLogger.cpp
+    XLoggerManager.cpp
     XBaseConfig.cpp)
 
 if (ANDROID)
