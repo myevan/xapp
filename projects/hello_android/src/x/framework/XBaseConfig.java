@@ -1,4 +1,4 @@
-package com.example.x.framework;
+package x.framework;
 
 public class XBaseConfig
 {

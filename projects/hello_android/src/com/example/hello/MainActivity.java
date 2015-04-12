@@ -1,6 +1,7 @@
 package com.example.hello;
 
-import com.example.x.framework.*;
+import x.framework.XBaseConfig;
+import x.framework.XAndroidSystem;
 
 import android.app.Activity;
 import android.os.Bundle;
