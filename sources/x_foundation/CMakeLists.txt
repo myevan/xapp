@@ -13,7 +13,7 @@ set(COMMON_SOURCES
     XPath.cpp
     XBaseConfig.cpp)
 
-if (POSIX)
+if (FORCE_POSIX)
     set(PLATFORM_SOURCES 
         posix/XLogger.cpp
         posix/XDefaultLogger.cpp)
