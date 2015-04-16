@@ -3,6 +3,8 @@
 #ifndef __X_STRING__
 #define __X_STRING__
 
+#include <string>
+
 namespace xf {
 
 class XString
@@ -24,6 +26,11 @@ public:
     inline XString(const char* strPtr, size_t strLen)
     : m_strPtr(strPtr)
     , m_strLen(strLen)
+    {}
+
+    inline XString(const std::string& str)
+    : m_strPtr(str.c_str())
+    , m_strLen(str.length())
     {}
 
 public:

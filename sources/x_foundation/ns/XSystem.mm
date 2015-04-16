@@ -24,15 +24,29 @@ XSystem::XSystem()
 
 bool XSystem::TryGetResourceAbsPath(const XString& dirPath, const XString& fileName, std::string& outAbsPath)
 {
-    NSString* nDirPath = [NSString stringWithUTF8String:dirPath.GetPtr() length:dirPath.GetLen()];
-    NSString* nFileName = [NSString stringWithUTF8String:fileName.GetPtr() length:fileName.GetLen()];
-    NSString* nResAbsPath = [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirPath];
+    NSString* nResAbsPath = XSystem::NSGetResourceAbsPath(dirPath, fileName);
     if (nResAbsPath == nil) 
         return false;
 
     const char* cResAbsPath = [nResAbsPath UTF8String];
     outAbsPath = cResAbsPath;
     return true;
+}
+
+XBinary* XSystem::TryGetResourceBinary(const XString& dirPath, const XString& fileName)
+{
+    NSString* nResAbsPath = XSystem::NSGetResourceAbsPath(dirPath, fileName);
+    if (nResAbsPath == nil) 
+        return NULL;
+
+    return NULL; 
+}
+
+NSString* XSystem::NSGetResourceAbsPath(const XString& xDirPath, const XString& xFileName)
+{
+    NSString* nDirPath = [[[NSString alloc] initWithBytes:xDirPath.GetPtr() length:xDirPath.GetLen() encoding:NSUTF8StringEncoding] autorelease];
+    NSString* nFileName = [[[NSString alloc] initWithBytes:xFileName.GetPtr() length:xFileName.GetLen() encoding:NSUTF8StringEncoding] autorelease];
+    return [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirPath];
 }
 
 } } // end_of_namespace:xf.ns

@@ -3,7 +3,7 @@
 #ifndef __ANDROID_X_ASSET_BINARY__
 #define __ANDROID_X_ASSET_BINARY__
 
-#include <x_foundation/XBinary.h>
+#include <x_foundation/XHeapBinary.h>
 #include <x_foundation/XString.h>
 
 #include <android/asset_manager.h>
@@ -12,7 +12,7 @@
 
 namespace xf { namespace android {
 
-class XAssetBinary : public XBinary
+class XAssetBinary : public XHeapBinary
 {
 public:
     static void BindAssetManager(AAssetManager* assetManager)
@@ -32,7 +32,7 @@ public:
         }
 
         size_t newAssetSize = AAsset_getLength(newAssetPtr);
-        XAssetBinary* newAssetBinPtr = AllocAssetBinary(newAssetSize);
+        XAssetBinary* newAssetBinPtr = AllocBinary<XAssetBinary>(newAssetSize);
         if (newAssetBinPtr != NULL)
         {
             newAssetBinPtr->LoadAsset(newAssetPtr);
@@ -42,70 +42,14 @@ public:
     }
 
 private:
-    static XAssetBinary* AllocAssetBinary(size_t binLen)
+    void LoadAsset(AHeap* assetPtr)
     {
-        if (binLen == 0)
-        {
-            static XAssetBinary s_emptyBin;
-            return &s_emptyBin;
-        }
-        else
-        {
-            return new XAssetBinary(binLen);
-        }
-    }
-
-    static void FreeAssetBinary(XAssetBinary* delBinPtr)
-    {
-        if (delBinPtr != NULL)
-        {
-            delete delBinPtr;
-        }
+        AHeap_read(assetPtr, m_binPtr, m_binLen);
     }
 
 private:
     static AAssetManager* ms_assetManager;
 
-public:
-    virtual ~XAssetBinary()
-    {
-        if (m_binPtr != NULL)
-        {
-            x_debugn("free");
-            free(m_binPtr);
-        }
-    }
-
-private:
-    inline XAssetBinary()
-    : XBinary()
-    {
-    }
-
-    inline XAssetBinary(size_t binLen)
-    : m_binLen(binLen)
-    , m_binPtr((unsigned char*)malloc(m_binLen))
-    {
-        x_debugn("alloc");
-    }
-
-    void LoadAsset(AAsset* assetPtr)
-    {
-        AAsset_read(assetPtr, m_binPtr, m_binLen);
-    }
-
-    void DeleteThis()
-    {
-        FreeAssetBinary(this);
-    }
-
-public:
-    inline const unsigned char* GetPtr() const { return m_binPtr; }
-    inline size_t GetLen() const { return m_binLen; }
-
-private:
-    unsigned char* m_binPtr;
-    size_t m_binLen;
 };
 
 } } // end_of_namespace:xf.android

@@ -17,6 +17,11 @@ public:
 
     bool TryGetResourceAbsPath(const XString& dirPath, const XString& fileName, std::string& outAbsPath) override;
 
+    virtual XBinary* TryGetResourceBinary(const XString& dirRelPath, const XString& fileName) override;
+
+public:
+    NSString* NSGetResourceAbsPath(const XString& dirPath, const XString& fileName);
+
 private:
     NSBundle* m_mainBundle;
 };

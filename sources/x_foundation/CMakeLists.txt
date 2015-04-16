@@ -1,6 +1,8 @@
 set(PUBLIC_HEADERS
     XString.h
     XBinary.h
+    XHeapBinary.h
+    XFileBinary.h
     XURI.h
     XLogType.h
     XLogMacros.h

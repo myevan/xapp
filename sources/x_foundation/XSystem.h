@@ -21,6 +21,8 @@ public:
 
 public:
     virtual bool TryGetResourceAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath) { return false; }
+
+    virtual XBinary* TryGetResourceBinary(const XString& dirRelPath, const XString& fileName) { return NULL; }
 };
 
 } // end_of_namespace:xf

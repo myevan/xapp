@@ -11,6 +11,7 @@
 #import <x_foundation/XBaseConfig.h>
 #import <x_foundation/XLogMacros.h>
 #import <x_foundation/XSystem.h>
+#import <x_foundation/XFileBinary.h>
 
 #import <string>
 
@@ -29,10 +30,26 @@ using namespace xf;
     
     std::string testAbsPath;
     XSystem& system = XSystem::GetSystem();
-    if (system.TryGetResourceAbsPath("", "test.txt", testAbsPath))
-        x_debugn(testAbsPath.c_str());
-    else
+    if (!system.TryGetResourceAbsPath("", "test.txt", testAbsPath))
+    {
         x_debugn("not_found_test");
+        return;
+    }
+    
+    x_debugn(testAbsPath.c_str());
+    XBinary* binPtr = XFileBinary::LoadFileBinary(testAbsPath.c_str());
+    if (!binPtr)
+    {
+        x_debugn("not_loaded_bin");        
+        return;
+    }
+    
+    binPtr->IncRef();
+    
+    std::string binText((const char*)binPtr->GetPtr(), binPtr->GetLen());
+    x_debugn(binText.c_str());
+    
+    binPtr->DecRef();
 }
 
 - (void)setRepresentedObject:(id)representedObject {

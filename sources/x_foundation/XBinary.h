@@ -37,16 +37,15 @@ public:
         }
     }
 
-protected:
-    virtual void DeleteThis()
-    {}
-
-
 public:
     inline const unsigned char* GetPtr() const { return m_binPtr; }
     inline size_t GetLen() const { return m_binLen; }
 
-private:
+protected:
+    virtual void DeleteThis()
+    {}
+
+protected:
     unsigned char* m_binPtr;
     size_t m_binLen;
 
