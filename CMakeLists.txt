@@ -2,13 +2,15 @@ cmake_minimum_required(VERSION 2.8)
 
 project(framework)
 
+option(FORCE_POSIX "Force to build on POSIX mode" OFF)
+
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmakes")
 
 include(cotire)
 
 include_directories("${CMAKE_SOURCE_DIR}/sources")
 
-if (POSIX)
+if (FORCE_POSIX)
     add_definitions("-DPOSIX=1")
 elseif (ANDROID)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")

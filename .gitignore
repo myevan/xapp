@@ -11,3 +11,4 @@ projects/*_android/assets/*
 project.xcworkspace
 *.xcuserdatad
 *.swp
+*~
