@@ -1,8 +1,8 @@
 #include "StdAfx.h"
 
-#include <x_foundation/ns/XString.h>
+#import "x_foundation/ns/NSString+XString.h"
 
-@implementation NSString (stringWithBytes)
+@implementation NSString (XString)
 
 + (NSString*)stringWithBytes:(const void *)bytes length:(NSUInteger)length encoding:(NSStringEncoding)encoding 
 {

@@ -1,11 +1,11 @@
 #pragma once
 
-#ifndef __NS_X_STRING__
-#define __NS_X_STRING__
+#ifndef __NS_STRING+X_STRING__
+#define __NS_STRING+X_STRING__
 
 #include <x_foundation/XString.h>
 
-@interface NSString (stringWithBytes)
+@interface NSString (XString)
 
 + (NSString*)stringWithBytes:(const void *)bytes length:(NSUInteger)length encoding:(NSStringEncoding)encoding;
 + (NSString*)stringWithUTF8String:(const char *)chars length:(NSUInteger)length;

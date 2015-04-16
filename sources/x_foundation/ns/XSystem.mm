@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 
-#include <x_foundation/ns/XSystem.h>
-#include <x_foundation/ns/XString.h>
+#import "x_foundation/ns/XSystem.h"
+#import "x_foundation/ns/NSString+XString.h"
 
 using namespace xf;
 
@@ -45,7 +45,8 @@ XBinary* XSystem::TryGetResourceBinary(const XString& dirPath, const XString& fi
 NSString* XSystem::NSGetResourceAbsPath(const XString& xDirPath, const XString& xFileName)
 {
     NSString* nDirPath = [[[NSString alloc] initWithBytes:xDirPath.GetPtr() length:xDirPath.GetLen() encoding:NSUTF8StringEncoding] autorelease];
-    NSString* nFileName = [[[NSString alloc] initWithBytes:xFileName.GetPtr() length:xFileName.GetLen() encoding:NSUTF8StringEncoding] autorelease];
+    //NSString* nFileName = [[[NSString alloc] initWithBytes:xFileName.GetPtr() length:xFileName.GetLen() encoding:NSUTF8StringEncoding] autorelease];
+    NSString* nFileName = [NSString stringWithXString:xFileName];
     return [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirPath];
 }
 

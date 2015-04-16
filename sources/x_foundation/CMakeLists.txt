@@ -28,8 +28,11 @@ elseif (ANDROID)
         android/XLogger.cpp
         android/XDefaultLogger.cpp)
 elseif (IOS OR MAC)
+    set(PLATFORM_DIR ns)
+    set(PLATFORM_HEADERS
+        ns/NSString+XString.h)
     set(PLATFORM_SOURCES 
-        ns/XString.mm
+        ns/NSString+XString.mm
         ns/XSystem.mm
         ns/XLogger.mm
         ns/XDefaultLogger.mm)
@@ -58,5 +61,10 @@ endif()
 install(
     FILES ${PUBLIC_HEADERS} 
     DESTINATION include/x_foundation)
+
+install(
+    FILES ${PLATFORM_HEADERS} 
+    DESTINATION include/x_foundation/${PLATFORM_DIR})
+
 
 

@@ -12,6 +12,7 @@
 #import <x_foundation/XLogMacros.h>
 #import <x_foundation/XSystem.h>
 #import <x_foundation/XFileBinary.h>
+#import <x_foundation/ns/NSString+XString.h>
 
 #import <string>
 
@@ -40,7 +41,7 @@ using namespace xf;
     XBinary* binPtr = XFileBinary::LoadFileBinary(testAbsPath.c_str());
     if (!binPtr)
     {
-        x_debugn("not_loaded_bin");        
+        x_debugn("not_loaded_bin");
         return;
     }
     
