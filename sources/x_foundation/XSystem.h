@@ -3,7 +3,9 @@
 #ifndef __X_SYSTEM__
 #define __X_SYSTEM__
 
+#include <x_foundation/XURI.h>
 #include <x_foundation/XString.h>
+#include <x_foundation/XBinary.h>
 
 #include <string>
 
@@ -18,7 +20,7 @@ public:
     virtual ~XSystem() {}
 
 public:
-    virtual bool TryGetResourceFileAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath) { return false; }
+    virtual bool TryGetResourceAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath) { return false; }
 };
 
 } // end_of_namespace:xf

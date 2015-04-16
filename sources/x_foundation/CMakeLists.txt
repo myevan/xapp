@@ -1,5 +1,7 @@
 set(PUBLIC_HEADERS
     XString.h
+    XBinary.h
+    XURI.h
     XLogType.h
     XLogMacros.h
     ILogger.h

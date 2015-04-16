@@ -21,7 +21,7 @@ XSystem::XSystem()
     m_mainBundle = [NSBundle mainBundle];
 }
 
-bool XSystem::TryGetResourceFileAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath)
+bool XSystem::TryGetResourceAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath)
 {
     NSString* nFileName = [NSString stringWithUTF8String:fileName.GetPtr()];
     NSString* nDirRelPath = [NSString stringWithUTF8String:dirRelPath.GetPtr()];
