@@ -28,7 +28,8 @@ using namespace xf;
     x_debugn("!!");
     
     std::string testAbsPath;
-    if (XSystem::GetSystem().TryGetResourceAbsPath("", "test.txt", testAbsPath))
+    XSystem& system = XSystem::GetSystem();
+    if (system.TryGetResourceAbsPath("", "test.txt", testAbsPath))
         x_debugn(testAbsPath.c_str());
     else
         x_debugn("not_found_test");
