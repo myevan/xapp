@@ -4,12 +4,19 @@
 
 @implementation NSString (stringWithBytes)
 
-+ (NSString*)stringWithBytes:(const void *)bytes length:(NSUInteger)length encoding:(NSStringEncoding)encoding {
++ (NSString*)stringWithBytes:(const void *)bytes length:(NSUInteger)length encoding:(NSStringEncoding)encoding 
+{
     return [[[NSString alloc] initWithBytes:bytes length:length encoding:encoding] autorelease];
 }
 
-+ (NSString*)stringWithUTF8String:(const char *)chars length:(NSUInteger)length {
++ (NSString*)stringWithUTF8String:(const char *)chars length:(NSUInteger)length 
+{
     return [[[NSString alloc] initWithBytes:chars length:length encoding:NSUTF8StringEncoding] autorelease];
+}
+
++ (NSString*)stringWithXString:(const xf::XString&)xStr 
+{
+    return [[[NSString alloc] initWithBytes:xStr.GetPtr() length:xStr.GetLen() encoding:NSUTF8StringEncoding] autorelease];
 }
 
 @end
