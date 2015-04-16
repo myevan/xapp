@@ -15,7 +15,7 @@ public:
 public:
     XSystem();
 
-    bool TryGetResourceAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath) override;
+    bool TryGetResourceAbsPath(const XString& dirPath, const XString& fileName, std::string& outAbsPath) override;
 
 private:
     NSBundle* m_mainBundle;

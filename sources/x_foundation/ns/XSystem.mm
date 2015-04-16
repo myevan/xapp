@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 
 #include <x_foundation/ns/XSystem.h>
+#include <x_foundation/ns/XString.h>
 
 using namespace xf;
 
@@ -21,11 +22,11 @@ XSystem::XSystem()
     m_mainBundle = [NSBundle mainBundle];
 }
 
-bool XSystem::TryGetResourceAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath)
+bool XSystem::TryGetResourceAbsPath(const XString& dirPath, const XString& fileName, std::string& outAbsPath)
 {
-    NSString* nFileName = [NSString stringWithUTF8String:fileName.GetPtr()];
-    NSString* nDirRelPath = [NSString stringWithUTF8String:dirRelPath.GetPtr()];
-    NSString* nResAbsPath = [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirRelPath];
+    NSString* nDirPath = [NSString stringWithUTF8String:dirPath.GetPtr() length:dirPath.GetLen()];
+    NSString* nFileName = [NSString stringWithUTF8String:fileName.GetPtr() length:fileName.GetLen()];
+    NSString* nResAbsPath = [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirPath];
     if (nResAbsPath == nil) 
         return false;
 
