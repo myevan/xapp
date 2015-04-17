@@ -15,7 +15,7 @@ public:
     {
     }
 
-    void MakeEndChar()
+    inline void MakeEndChar()
     {
         byte_t* bytes = GetBytes();
         size_t size = GetSize();
@@ -29,6 +29,13 @@ public:
 
     inline const char* GetChars() const 
     { return (const char*)GetBytes(); }
+
+    inline operator const char*()
+    { return (char*)GetBytes(); }
+
+    inline operator const char*() const
+    { return (char*)GetBytes(); }
+
 };
 
 } // end_of_namespace:xf
