@@ -2,6 +2,7 @@
 #ifndef __STD_AFX__
 #define __STD_AFX__
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
