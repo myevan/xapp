@@ -3,6 +3,8 @@
 #ifndef __X_BINARY__
 #define __X_BINARY__
 
+#include <x_foundation/XTypes.h>
+
 namespace xf {
 
 class XBinary
@@ -16,17 +18,17 @@ public:
     , m_binLen(0)
     {}
 
-    inline XBinary(unsigned char* strPtr, size_t strLen)
+    inline XBinary(byte_t* strPtr, size_t strLen)
     : m_binPtr(strPtr)
     , m_binLen(strLen)
     {}
 
 public:
-    inline const unsigned char* GetPtr() const { return m_binPtr; }
+    inline const byte_t* GetPtr() const { return m_binPtr; }
     inline size_t GetLen() const { return m_binLen; }
 
 protected:
-    unsigned char* m_binPtr;
+    byte_t* m_binPtr;
     size_t m_binLen;
 };
 

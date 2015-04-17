@@ -13,22 +13,6 @@ namespace xf {
 class XHeapBinary : public XBinary
 {
 public:
-    template<typename T>
-    static std::shared_ptr<T> AllocBinary(size_t binLen)
-    {
-        return std::shared_ptr<T>(new T(binLen), FreeBinary<T>);
-    }
-
-    template<typename T>
-    static void FreeBinary(T* delBinPtr)
-    {
-        if (delBinPtr != NULL)
-        {
-            delete delBinPtr;
-        }
-    }
-
-public:
     virtual ~XHeapBinary()
     {
         if (m_binPtr != NULL)
@@ -45,7 +29,7 @@ protected:
     }
 
     inline XHeapBinary(size_t binLen)
-    : XBinary((unsigned char*)malloc(binLen), binLen)
+    : XBinary((byte_t*)malloc(binLen), binLen)
     {
         x_debugn("alloc");
     }
