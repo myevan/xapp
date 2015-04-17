@@ -1,6 +1,9 @@
 set(PUBLIC_HEADERS
+    XTypes.h
+    XPool.h
     XString.h
     XBinary.h
+    XFileStream.h
     XHeapBinary.h
     XFileBinary.h
     XURI.h
