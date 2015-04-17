@@ -40,7 +40,7 @@ using namespace xf;
     
     x_debugn(testAbsPath);
     
-    std::shared_ptr<XBinary> binPtr = XFileBinary::LoadFileBinary(testAbsPath);
+    std::shared_ptr<XBinary> binPtr = system.LoadFileBinary(testAbsPath);
     if (!binPtr)
     {
         x_debugn("not_loaded_bin");
