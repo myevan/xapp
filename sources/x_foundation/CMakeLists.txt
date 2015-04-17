@@ -21,7 +21,9 @@ set(COMMON_SOURCES
     XBaseConfig.cpp)
 
 if (FORCE_POSIX)
+    set(CMAKE_CXX_FLAGS "-Wall -std=c++11")
     set(PLATFORM_SOURCES 
+        posix/XSystem.cpp
         posix/XLogger.cpp
         posix/XDefaultLogger.cpp)
 elseif (ANDROID)
