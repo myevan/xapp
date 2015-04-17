@@ -31,7 +31,7 @@ public:
 
     bool Open(const XString& fileAbsPath)
     {
-        m_filePtr = fopen(fileAbsPath.GetPtr(), "rb");
+        m_filePtr = fopen(fileAbsPath, "rb");
         if (!m_filePtr)
             return false;
 

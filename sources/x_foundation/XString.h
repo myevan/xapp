@@ -14,35 +14,39 @@ public:
 
 public:
     inline XString()
-    : m_strPtr("")
-    , m_strLen(0)
+    : m_chars("")
+    , m_size(0)
     {}
 
-    inline XString(const char* strPtr)
-    : m_strPtr(strPtr)
-    , m_strLen(strlen(strPtr))
+    inline XString(const char* chars)
+    : m_chars(chars)
+    , m_size(strlen(chars))
     {}
 
-    inline XString(const char* strPtr, size_t strLen)
-    : m_strPtr(strPtr)
-    , m_strLen(strLen)
+    inline XString(const char* chars, size_t size)
+    : m_chars(chars)
+    , m_size(size)
     {}
 
     inline XString(const std::string& str)
-    : m_strPtr(str.c_str())
-    , m_strLen(str.length())
+    : m_chars(str.c_str())
+    , m_size(str.length())
     {}
 
 public:
-    inline const char* GetPtr() const { return m_strPtr; }
-    inline size_t GetLen() const { return m_strLen; }
+    inline const char* GetChars() const 
+    { return m_chars; }
 
-    inline operator const char* () { return m_strPtr; }
+    inline size_t GetSize() const 
+    { return m_size; }
+
+    inline operator const char* () const
+    { return m_chars; }
 
 public:
     inline void GetString(std::string& outStr) const
     {
-        outStr.assign(m_strPtr, m_strLen);
+        outStr.assign(m_chars, m_size);
     }
 
     inline size_t GetLastIndexOf(char inCharCode) const
@@ -66,17 +70,17 @@ public:
 public:
     inline bool TryGetLastIndexOf(char inCharCode, size_t& outIndex) const
     {
-        const char* endCharPtr = m_strPtr + m_strLen;
-        if (m_strPtr == endCharPtr)
+        const char* endCharPtr = m_chars + m_size;
+        if (m_chars == endCharPtr)
             return false;
 
         endCharPtr--;
 
-        while (endCharPtr != m_strPtr)
+        while (endCharPtr != m_chars)
         {
             if (*endCharPtr == inCharCode)
             {
-                outIndex = (endCharPtr - m_strPtr);
+                outIndex = (endCharPtr - m_chars);
                 outIndex++;
                 return true;        
             }
@@ -89,16 +93,16 @@ public:
 
     inline bool TryGetSliceRight(size_t index, XString& outSlice) const
     {
-        if (index >= m_strLen)
+        if (index >= m_size)
             return false;
 
-        outSlice = XString(m_strPtr + index, m_strLen - index); 
+        outSlice = XString(m_chars + index, m_size - index); 
         return true;
     }
 
 private:
-    const char* m_strPtr;
-    size_t m_strLen;
+    const char* m_chars;
+    size_t m_size;
 };
 
 

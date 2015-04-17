@@ -26,7 +26,7 @@ using namespace xf;
 
     XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
     const XString& title = baseConfig.GetTitle();
-    self.mainLabel.stringValue = [NSString stringWithUTF8String:title.GetPtr()];
+    self.mainLabel.stringValue = [NSString stringWithXString:title];
     
     x_debugn("!!");
     

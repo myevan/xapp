@@ -16,7 +16,7 @@
 
 + (NSString*)stringWithXString:(const xf::XString&)xStr 
 {
-    return [[[NSString alloc] initWithBytes:xStr.GetPtr() length:xStr.GetLen() encoding:NSUTF8StringEncoding] autorelease];
+    return [[[NSString alloc] initWithBytes:xStr.GetChars() length:xStr.GetSize() encoding:NSUTF8StringEncoding] autorelease];
 }
 
 @end
