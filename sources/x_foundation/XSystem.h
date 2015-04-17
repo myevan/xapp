@@ -37,10 +37,10 @@ public:
         std::shared_ptr<XFileBinary> newBinPtr = XPool<XFileBinary>::NewObject(newStreamSize);
         
         XFileBinary& newBin = *newBinPtr;
-        newBin.SetFilePath(fileAbsPath);
         if (!newBin.TryLoadFile(newStream))
             return std::shared_ptr<XFileBinary>();
 
+        newBin.SetFilePath(fileAbsPath);
         return newBinPtr;
     }
 
