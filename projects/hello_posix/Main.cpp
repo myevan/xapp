@@ -9,6 +9,6 @@ int main(int argc, const char** argv)
 {
     XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
     const XString& title = baseConfig.GetTitle();
-    x_debugn(title.GetPtr());
+    x_debugn(title);
     return 0;
 }
