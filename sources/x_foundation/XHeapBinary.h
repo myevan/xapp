@@ -4,8 +4,9 @@
 #define __X_HEAP_BINARY__
 
 #include <x_foundation/XBinary.h>
-
 #include <x_foundation/XLogMacros.h>
+
+#include <memory>
 
 namespace xf {
 
@@ -13,9 +14,9 @@ class XHeapBinary : public XBinary
 {
 public:
     template<typename T>
-    static T* AllocBinary(size_t binLen)
+    static std::shared_ptr<T> AllocBinary(size_t binLen)
     {
-        return new T(binLen);
+        return std::shared_ptr<T>(new T(binLen), FreeBinary<T>);
     }
 
     template<typename T>
@@ -47,11 +48,6 @@ protected:
     : XBinary((unsigned char*)malloc(binLen), binLen)
     {
         x_debugn("alloc");
-    }
-
-    void DeleteThis()
-    {
-        FreeBinary(this);
     }
 };
 

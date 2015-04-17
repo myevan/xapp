@@ -5,26 +5,27 @@
 
 #include <x_foundation/XHeapBinary.h>
 
+
 namespace xf {
 
 class XFileBinary : public XHeapBinary
 {
 public:
-    static XFileBinary* LoadFileBinary(const XString& xFileAbsPath)
+    static std::shared_ptr<XFileBinary> LoadFileBinary(const XString& fileAbsPath)
     {
-        FILE* fp = fopen(xFileAbsPath.GetPtr(), "rb");
+        FILE* fp = fopen(fileAbsPath.GetPtr(), "rb");
         if (!fp)
-            return NULL;
+            return std::shared_ptr<XFileBinary>();
 
         fseek(fp, 0, SEEK_END);
 
         size_t newFileSize = ftell(fp);
-        XFileBinary* newFileBinPtr = AllocBinary<XFileBinary>(newFileSize);
-        if (newFileBinPtr != NULL)
-        {
-            fseek(fp, 0, SEEK_SET);
-            newFileBinPtr->LoadFile(fp);
-        }
+        std::shared_ptr<XFileBinary> newFileBinPtr = AllocBinary<XFileBinary>(newFileSize);
+        fseek(fp, 0, SEEK_SET);
+
+        XFileBinary& newFileBin = *newFileBinPtr;
+        newFileBin.SetFilePath(fileAbsPath);
+        newFileBin.LoadFile(fp);
         fclose(fp);
 
         return newFileBinPtr;
@@ -36,10 +37,19 @@ public:
     {
     }
 
+private:
+    void SetFilePath(const XString& filePath)
+    {
+        filePath.GetString(m_filePath);
+    }
+
     void LoadFile(FILE* fp)
     {
         fread(m_binPtr, m_binLen, 1, fp);
     }
+
+private:
+    std::string m_filePath;
 };
 
 } // end_of_namespace:xf
