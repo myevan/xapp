@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef __NS_STRING+X_STRING__
-#define __NS_STRING+X_STRING__
+#ifndef __NS_STRING_X_STRING__
+#define __NS_STRING_X_STRING__
 
 #include <x_foundation/XString.h>
 
