@@ -15,6 +15,7 @@
 #import <x_foundation/ns/NSString+XString.h>
 
 #import <string>
+#import <memory>
 
 using namespace xf;
 
@@ -37,20 +38,17 @@ using namespace xf;
         return;
     }
     
-    x_debugn(testAbsPath.c_str());
-    XBinary* binPtr = XFileBinary::LoadFileBinary(testAbsPath.c_str());
+    x_debugn(testAbsPath);
+    
+    std::shared_ptr<XBinary> binPtr = XFileBinary::LoadFileBinary(testAbsPath);
     if (!binPtr)
     {
         x_debugn("not_loaded_bin");
         return;
     }
     
-    binPtr->IncRef();
-    
     std::string binText((const char*)binPtr->GetPtr(), binPtr->GetLen());
-    x_debugn(binText.c_str());
-    
-    binPtr->DecRef();
+    x_debugn(binText);
 }
 
 - (void)setRepresentedObject:(id)representedObject {
