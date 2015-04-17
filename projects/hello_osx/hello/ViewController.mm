@@ -11,7 +11,7 @@
 #import <x_foundation/XBaseConfig.h>
 #import <x_foundation/XLogMacros.h>
 #import <x_foundation/XSystem.h>
-#import <x_foundation/XFileBinary.h>
+#import <x_foundation/XBinary.h>
 #import <x_foundation/ns/NSString+XString.h>
 
 #import <string>
@@ -40,15 +40,14 @@ using namespace xf;
     
     x_debugn(testAbsPath);
     
-    std::shared_ptr<XBinary> binPtr = system.LoadFileBinary(testAbsPath);
-    if (!binPtr)
+    std::shared_ptr<XText> textPtr = system.LoadFileText(testAbsPath);
+    if (!textPtr)
     {
-        x_debugn("not_loaded_bin");
+        x_debugn("not_loaded_text");
         return;
     }
     
-    std::string binText((const char*)binPtr->GetPtr(), binPtr->GetLen());
-    x_debugn(binText);
+    x_debugn(textPtr->GetChars());
 }
 
 - (void)setRepresentedObject:(id)representedObject {

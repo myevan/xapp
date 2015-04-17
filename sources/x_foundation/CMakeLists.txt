@@ -3,9 +3,9 @@ set(PUBLIC_HEADERS
     XPool.h
     XString.h
     XBinary.h
+    XBuffer.h
+    XText.h
     XFileStream.h
-    XHeapBinary.h
-    XFileBinary.h
     XURI.h
     XLogType.h
     XLogMacros.h

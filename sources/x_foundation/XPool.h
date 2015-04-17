@@ -20,6 +20,12 @@ public:
         return std::shared_ptr<T>(new T(arg), DeleteObject);
     }
 
+    template<typename A1, typename A2>
+    static std::shared_ptr<T> NewObject(A1 arg1, A2 arg2)
+    {
+        return std::shared_ptr<T>(new T(arg1, arg2), DeleteObject);
+    }
+
     static void DeleteObject(T* delBinPtr)
     {
         if (delBinPtr != NULL)

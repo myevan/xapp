@@ -14,22 +14,40 @@ public:
     {}
 
     inline XBinary()
-    : m_binPtr(NULL)
-    , m_binLen(0)
+    : m_bytes(NULL)
+    , m_size(0)
     {}
 
-    inline XBinary(byte_t* strPtr, size_t strLen)
-    : m_binPtr(strPtr)
-    , m_binLen(strLen)
+    inline XBinary(byte_t* bytes, size_t size)
+    : m_bytes(bytes)
+    , m_size(size)
     {}
+
+    void ReadBytes(size_t index, size_t size, byte_t* outBytes)
+    {
+        assert(index + size < m_size);
+        memcpy(outBytes, m_bytes + index, size);
+    }
+
+    void WriteBytes(size_t index, size_t size, byte_t* inBytes)
+    {
+        assert(index + size < m_size);
+        memcpy(m_bytes + index, inBytes, size);
+    }
 
 public:
-    inline const byte_t* GetPtr() const { return m_binPtr; }
-    inline size_t GetLen() const { return m_binLen; }
+    inline byte_t* GetBytes() 
+    { return m_bytes; }
 
-protected:
-    byte_t* m_binPtr;
-    size_t m_binLen;
+    inline const byte_t* GetBytes() const 
+    { return m_bytes; }
+
+    inline size_t GetSize() const 
+    { return m_size; }
+
+private:
+    byte_t* m_bytes;
+    size_t  m_size;
 };
 
 } // end_of_namespace:xf
