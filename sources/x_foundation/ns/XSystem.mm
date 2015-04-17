@@ -42,11 +42,10 @@ XBinary* XSystem::TryGetResourceBinary(const XString& dirPath, const XString& fi
     return NULL; 
 }
 
-NSString* XSystem::NSGetResourceAbsPath(const XString& xDirPath, const XString& xFileName)
+NSString* XSystem::NSGetResourceAbsPath(const XString& dirPath, const XString& fileName)
 {
-    NSString* nDirPath = [[[NSString alloc] initWithBytes:xDirPath.GetPtr() length:xDirPath.GetLen() encoding:NSUTF8StringEncoding] autorelease];
-    //NSString* nFileName = [[[NSString alloc] initWithBytes:xFileName.GetPtr() length:xFileName.GetLen() encoding:NSUTF8StringEncoding] autorelease];
-    NSString* nFileName = [NSString stringWithXString:xFileName];
+    NSString* nDirPath = [NSString stringWithXString:dirPath];
+    NSString* nFileName = [NSString stringWithXString:fileName];
     return [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirPath];
 }
 
