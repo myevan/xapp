@@ -37,7 +37,14 @@ public:
     inline const char* GetPtr() const { return m_strPtr; }
     inline size_t GetLen() const { return m_strLen; }
 
+    inline operator const char* () { return m_strPtr; }
+
 public:
+    inline void GetString(std::string& outStr) const
+    {
+        outStr.assign(m_strPtr, m_strLen);
+    }
+
     inline size_t GetLastIndexOf(char inCharCode) const
     {
         size_t retIndex;
