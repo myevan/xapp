@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(text)
+project(load_text)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../../cmakes")
 
@@ -19,14 +19,14 @@ set(LIBRARIES
 include_directories("${CMAKE_SOURCE_DIR}/../../__platforms/posix/include")
 link_directories("${CMAKE_SOURCE_DIR}/../../__platforms/posix/lib/static")
 
-add_executable(text ${SOURCES})
-set_target_properties(text PROPERTIES OUTPUT_NAME text_posix)
-set_target_properties(text PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "StdAfx.h")
-target_link_libraries(text ${LIBRARIES})
+add_executable(load_text ${SOURCES})
+set_target_properties(load_text PROPERTIES OUTPUT_NAME load_text_posix)
+set_target_properties(load_text PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "StdAfx.h")
+target_link_libraries(load_text ${LIBRARIES})
 
 include(cotire)
-cotire(text)
+cotire(load_text)
 
-install(TARGETS text RUNTIME DESTINATION bin)
+install(TARGETS load_text RUNTIME DESTINATION bin)
 
 file(COPY ${DATA_FILES} DESTINATION "${CMAKE_SOURCE_DIR}/../../__platforms/posix/bin")
