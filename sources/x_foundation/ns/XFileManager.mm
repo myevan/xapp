@@ -14,16 +14,12 @@ XFileManager::XFileManager()
 
 std::shared_ptr<XText> XFileManager::LoadText(const XString& uri)
 {
-    XString scheme;
-    if (TryParseURIScheme(uri, scheme))
+    XString uriBody;
+    XString uriScheme;
+    if (TryParseURI(uri, uriScheme, uriBody))
     {
-        if (scheme.Equals("app"))
+        if (uriScheme.Equals("app"))
         {
-            const char* uriChars = uri.GetChars();
-            size_t uriSize = uri.GetSize();
-            size_t schemeSize = scheme.GetSize() + 1;
-            XString uriBody(uriChars + schemeSize, uriSize - schemeSize); 
-            
             XString xDirPath;
             XString xFileName;
             SplitPath(uriBody, xDirPath, xFileName);

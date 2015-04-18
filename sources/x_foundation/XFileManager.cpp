@@ -12,13 +12,14 @@ void XFileManager::SetProgramArguments(int argCount, const char** args)
 const std::string& XFileManager::GetProgramPath() 
 { return m_programAbsPath; }
 
-bool XFileManager::TryParseURIScheme(const XString& uri, XString& outScheme)
+bool XFileManager::TryParseURI(const XString& uri, XString& outScheme, XString& outBody)
 {
     size_t schemeSepIndex;
     if (!uri.TryGetFirstIndexOf(':', schemeSepIndex))
         return false;
 
     outScheme = uri.GetSliceLeft(schemeSepIndex);
+    outBody = uri.GetSliceRight(schemeSepIndex + 1);
     return true;
 }
 
