@@ -16,7 +16,7 @@ public:
     XFileManager();
 
 public:
-    std::shared_ptr<XText> LoadText(const XString& uri) override;
+    std::shared_ptr<XFileStream> OpenStream(const XString& uri) override;
 
 private:
     NSBundle* m_mainBundle;

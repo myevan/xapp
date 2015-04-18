@@ -54,13 +54,23 @@ void XFileManager::JoinPath2(const XString& head, const XString& tail, std::stri
     outResult.append(tail.GetChars(), tail.GetSize());
 }
 
+std::shared_ptr<XFileStream> XFileManager::OpenStream(const XString& uri)
+{
+    std::shared_ptr<XFileStream> streamp = XPool<XFileStream>::NewObject();
+    XFileStream& stream = *streamp;
+    if (!stream.Open(uri))
+        return std::shared_ptr<XFileStream>();
+
+    return streamp;
+}
+
 std::shared_ptr<XBinary> XFileManager::LoadBinary(const XString& uri)
 {
-    std::shared_ptr<XFileStream> streamPtr = XPool<XFileStream>::NewObject();
-    XFileStream& stream = *streamPtr;
-    if (!stream.Open(uri))
+    std::shared_ptr<XFileStream> streamp = OpenStream(uri);
+    if (!streamp)
         return std::shared_ptr<XBinary>();
 
+    XFileStream& stream = *streamp;
     size_t size = stream.GetSize();
     std::shared_ptr<XBuffer> bufPtr = XPool<XBuffer>::NewObject(size, size);
     if (!bufPtr)
@@ -78,11 +88,11 @@ std::shared_ptr<XBinary> XFileManager::LoadBinary(const XString& uri)
 
 std::shared_ptr<XText> XFileManager::LoadText(const XString& uri)
 {
-    std::shared_ptr<XFileStream> streamPtr = XPool<XFileStream>::NewObject();
-    XFileStream& stream = *streamPtr;
-    if (!stream.Open(uri))
+    std::shared_ptr<XFileStream> streamp = OpenStream(uri);
+    if (!streamp)
         return std::shared_ptr<XText>();
 
+    XFileStream& stream = *streamp;
     size_t size = stream.GetSize();
     std::shared_ptr<XText> textPtr = XPool<XText>::NewObject(size, size);
     if (!textPtr)
