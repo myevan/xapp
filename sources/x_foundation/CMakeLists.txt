@@ -17,6 +17,7 @@ set(PUBLIC_HEADERS
 set(COMMON_SOURCES
     StdAfx.cpp
     XString.cpp
+    XBinary.cpp
     XPath.cpp
     XBaseConfig.cpp)
 

@@ -23,17 +23,8 @@ public:
     , m_size(size)
     {}
 
-    void ReadBytes(size_t index, size_t size, byte_t* outBytes)
-    {
-        assert(index + size < m_size);
-        memcpy(outBytes, m_bytes + index, size);
-    }
-
-    void WriteBytes(size_t index, size_t size, byte_t* inBytes)
-    {
-        assert(index + size < m_size);
-        memcpy(m_bytes + index, inBytes, size);
-    }
+    void ReadBytes(size_t index, size_t size, byte_t* outBytes);
+    void WriteBytes(size_t index, size_t size, byte_t* inBytes);
 
 public:
     inline byte_t* GetBytes() 
