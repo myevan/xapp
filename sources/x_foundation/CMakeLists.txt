@@ -10,9 +10,9 @@ set(PUBLIC_HEADERS
     XLogType.h
     ILogger.h
     XDebugMacros.h
-    XDefaultLogger.h
     XSystem.h
-    XBaseConfig.h)
+    XBaseConfig.h
+    XPlatform.h)
 
 set(COMMON_SOURCES
     StdAfx.cpp
@@ -25,13 +25,13 @@ if (FORCE_POSIX)
     set(PLATFORM_SOURCES 
         posix/XSystem.cpp
         posix/XLogger.cpp
-        posix/XDefaultLogger.cpp)
+        posix/XPlatform.cpp)
 elseif (ANDROID)
     set(PLATFORM_SOURCES 
         android/XAssetBinary.cpp
         android/XSystem.cpp
         android/XLogger.cpp
-        android/XDefaultLogger.cpp)
+        android/XPlatform.cpp)
 elseif (IOS OR MAC)
     set(PLATFORM_DIR ns)
     set(PLATFORM_HEADERS
@@ -40,7 +40,7 @@ elseif (IOS OR MAC)
         ns/NSString+XString.mm
         ns/XSystem.mm
         ns/XLogger.mm
-        ns/XDefaultLogger.mm)
+        ns/XPlatform.mm)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

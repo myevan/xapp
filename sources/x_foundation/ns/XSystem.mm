@@ -5,16 +5,6 @@
 
 using namespace xf;
 
-namespace xf {
-
-XSystem& XSystem::GetSystem()
-{
-    static ns::XSystem s_system;
-    return s_system;
-}
-
-} // end_of_namespace:xf
-
 namespace xf { namespace ns {
 
 XSystem::XSystem()
