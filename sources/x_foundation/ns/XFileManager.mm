@@ -12,7 +12,7 @@ XFileManager::XFileManager()
     m_mainBundle = [NSBundle mainBundle];
 }
 
-std::shared_ptr<XFileStream> XFileManager::OpenStream(const XString& uri)
+std::shared_ptr<XStream> XFileManager::OpenStream(const XString& uri)
 {
     XString uriBody;
     XString uriScheme;
@@ -34,7 +34,7 @@ std::shared_ptr<XFileStream> XFileManager::OpenStream(const XString& uri)
             }
         }
     }
-    return std::shared_ptr<XFileStream>();
+    return std::shared_ptr<XStream>();
 }
 
 
