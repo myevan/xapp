@@ -49,6 +49,29 @@ public:
         outStr.assign(m_chars, m_size);
     }
 
+    inline bool Equals(const char* chars) const
+    {
+        for (size_t i = 0; i != m_size; ++i)
+        {
+            if (m_chars[i] != chars[i])
+                return false;
+        }
+
+        if (chars[m_size] != '\0')
+            return false;
+
+        return true;
+    }
+
+    inline size_t GetFirstIndexOf(char inCharCode) const
+    {
+        size_t retIndex;
+        if (!TryGetFirstIndexOf(inCharCode, retIndex))
+            return (size_t)-1;
+
+        return retIndex;
+    }
+
     inline size_t GetLastIndexOf(char inCharCode) const
     {
         size_t retIndex;
@@ -58,47 +81,80 @@ public:
         return retIndex;
     }
     
-    inline XString GetSliceRight(size_t index) const
+    inline XString GetSlice(size_t leftIndex, size_t rightIndex) const
     {
-        XString retSlice;
-        if (!TryGetSliceRight(index, retSlice))
+        if (leftIndex >= m_size)
             return EMPTY;
 
-        return retSlice;
+        if (rightIndex >= m_size)
+            return EMPTY;
+
+        if (leftIndex >= rightIndex)
+            return EMPTY;
+
+        return XString(m_chars + leftIndex, rightIndex - leftIndex); 
+    }
+
+    inline XString GetSliceLeft(size_t index) const
+    {
+        if (index >= m_size)
+            return EMPTY;
+
+        return XString(m_chars, index); 
+    }
+
+    inline XString GetSliceRight(size_t index) const
+    {
+        if (index >= m_size)
+            return EMPTY;
+
+        return XString(m_chars + index, m_size - index); 
     }
 
 public:
-    inline bool TryGetLastIndexOf(char inCharCode, size_t& outIndex) const
+    inline bool TryGetFirstIndexOf(char inCharCode, size_t& outIndex) const
     {
+        const char* baseCharPtr = m_chars;
         const char* endCharPtr = m_chars + m_size;
-        if (m_chars == endCharPtr)
+        if (baseCharPtr == endCharPtr)
             return false;
 
-        endCharPtr--;
-
-        while (endCharPtr != m_chars)
+        const char* eachCharPtr = baseCharPtr;
+        while (eachCharPtr != endCharPtr)
         {
-            if (*endCharPtr == inCharCode)
+            if (*eachCharPtr == inCharCode)
             {
-                outIndex = (endCharPtr - m_chars);
-                outIndex++;
+                outIndex = (eachCharPtr - baseCharPtr);
                 return true;        
             }
-            endCharPtr--;
+            eachCharPtr++;
         }
 
-        outIndex = 0;
-        return true;
+        return false;
     }
 
-    inline bool TryGetSliceRight(size_t index, XString& outSlice) const
+    inline bool TryGetLastIndexOf(char inCharCode, size_t& outIndex) const
     {
-        if (index >= m_size)
+        const char* baseCharPtr = m_chars;
+        const char* eachCharPtr = m_chars + m_size;
+        if (baseCharPtr == eachCharPtr)
             return false;
 
-        outSlice = XString(m_chars + index, m_size - index); 
-        return true;
+        eachCharPtr--;
+
+        while (eachCharPtr != baseCharPtr)
+        {
+            if (*eachCharPtr == inCharCode)
+            {
+                outIndex = (eachCharPtr - baseCharPtr);
+                return true;        
+            }
+            eachCharPtr--;
+        }
+
+        return false;
     }
+
 
 private:
     const char* m_chars;

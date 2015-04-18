@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 
-#include <x_foundation/XDefaultLogger.h>
+#include <x_foundation/XPlatform.h>
 
 #include <x_foundation/ns/XLogger.h>
 #include <x_foundation/ns/XFileManager.h>

@@ -1,6 +1,9 @@
 #include "StdAfx.h"
 #include "XFileManager.h"
 
+#include <x_foundation/XPool.h>
+#include <x_foundation/XFileStream.h>
+
 namespace xf { 
 
 void XFileManager::SetProgramArguments(int argCount, const char** args)
@@ -20,11 +23,11 @@ void XFileManager::JoinPath2(const XString& head, const XString& tail, std::stri
     outResult.append(tail.GetChars(), tail.GetSize());
 }
 
-std::shared_ptr<XBinary> XFileManager::LoadBinary(const XString& fileAbsPath)
+std::shared_ptr<XBinary> XFileManager::LoadBinary(const XString& uri)
 {
     std::shared_ptr<XFileStream> streamPtr = XPool<XFileStream>::NewObject();
     XFileStream& stream = *streamPtr;
-    if (!stream.Open(fileAbsPath))
+    if (!stream.Open(uri))
         return std::shared_ptr<XBinary>();
 
     size_t size = stream.GetSize();
@@ -42,11 +45,11 @@ std::shared_ptr<XBinary> XFileManager::LoadBinary(const XString& fileAbsPath)
     return bufPtr; 
 }
 
-std::shared_ptr<XText> XFileManager::LoadText(const XString& fileAbsPath)
+std::shared_ptr<XText> XFileManager::LoadText(const XString& uri)
 {
     std::shared_ptr<XFileStream> streamPtr = XPool<XFileStream>::NewObject();
     XFileStream& stream = *streamPtr;
-    if (!stream.Open(fileAbsPath))
+    if (!stream.Open(uri))
         return std::shared_ptr<XText>();
 
     size_t size = stream.GetSize();

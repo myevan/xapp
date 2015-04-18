@@ -8,9 +8,9 @@
 
 #import "ViewController.h"
 
+#import <x_foundation/XDebugMacros.h>
 #import <x_foundation/XBaseConfig.h>
-#import <x_foundation/XLogMacros.h>
-#import <x_foundation/XSystem.h>
+#import <x_foundation/XPlatform.h>
 #import <x_foundation/XBinary.h>
 #import <x_foundation/ns/NSString+XString.h>
 
@@ -23,31 +23,22 @@ using namespace xf;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    x_debug("Hello World");
 
-    XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
-    const XString& title = baseConfig.GetTitle();
+    auto& baseConfig = XBaseConfig::GetBaseConfig();
+    const auto& title = baseConfig.GetTitle();
     self.mainLabel.stringValue = [NSString stringWithXString:title];
     
-    x_debugn("!!");
-    
-    std::string testAbsPath;
-    XSystem& system = XSystem::GetSystem();
-    if (!system.TryGetResourceAbsPath("", "test.txt", testAbsPath))
+    auto& fileManager = XPlatform::GetFileManager();
+    auto textp = fileManager.LoadText("app:test.txt");
+    if (!textp)
     {
-        x_debugn("not_found_test");
+        x_debug("not_loaded_text");
         return;
     }
     
-    x_debugn(testAbsPath);
-    
-    std::shared_ptr<XText> textPtr = system.LoadFileText(testAbsPath);
-    if (!textPtr)
-    {
-        x_debugn("not_loaded_text");
-        return;
-    }
-    
-    x_debugn(textPtr->GetChars());
+    x_debug(textp->GetChars());
 }
 
 - (void)setRepresentedObject:(id)representedObject {

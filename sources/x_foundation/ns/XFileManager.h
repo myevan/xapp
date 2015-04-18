@@ -15,12 +15,8 @@ public:
 public:
     XFileManager();
 
-    bool TryGetResourceAbsPath(const XString& dirPath, const XString& fileName, std::string& outAbsPath) override;
-
-    virtual XBinary* TryGetResourceBinary(const XString& dirPath, const XString& fileName) override;
-
 public:
-    NSString* NSGetResourceAbsPath(const XString& dirPath, const XString& fileName);
+    std::shared_ptr<XText> LoadText(const XString& uri) override;
 
 private:
     NSBundle* m_mainBundle;
