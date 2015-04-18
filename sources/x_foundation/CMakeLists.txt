@@ -33,7 +33,6 @@ if (FORCE_POSIX)
 elseif (ANDROID)
     set(PLATFORM_SOURCES 
         android/XLogger.cpp
-        android/XAssetBinary.cpp
         android/XFileManager.cpp
         android/XPlatform.cpp)
 elseif (IOS OR MAC)

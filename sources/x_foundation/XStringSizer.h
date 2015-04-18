@@ -17,22 +17,22 @@ public:
         m_curPos++;
     }
 
-    inline void AppendCStr(const char* inPtr)
+    inline void AppendCStr(const char* inChars)
     {
-        m_curPos += strlen(inPtr);
+        m_curPos += strlen(inChars);
     }
 
-    inline void AppendXStr(const XString& in)
+    inline void AppendXStr(const XString& inStr)
     {
-        m_curPos += in.GetLen();
+        m_curPos += inStr.GetSize();
     }
 
-    inline void AppendForm(size_t inMaxLen, const char* fmt, ...)
+    inline void AppendForm(size_t inMaxSize, const char* fmt, ...)
     {
-        m_curPos += inMaxLen;
+        m_curPos += inMaxSize;
     }
 
-    inline size_t GetLen()
+    inline size_t GetSize()
     {
         return m_curPos;
     }

@@ -14,5 +14,5 @@ JNIEXPORT jstring JNICALL X_JNI_FUNCTION(XBaseConfig, GetTitle)(JNIEnv* env, job
 {
     const XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
     const XString& title = baseConfig.GetTitle();
-    return (env)->NewStringUTF(title.GetPtr());
+    return (env)->NewStringUTF(title);
 }

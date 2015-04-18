@@ -11,26 +11,30 @@ namespace xf {
 class XBufferStream : public XStream
 {
 public:
-    XBinaryStream(std::shared_ptr<XBuffer> bufferp)
-    : m_bufferp(bufferp)
+    XBufferStream(std::shared_ptr<XBuffer> bufp)
+    : m_bufp(bufp)
     , m_readIndex(0)
     { }
 
-    virtual ~XBinaryStream()
+    virtual ~XBufferStream()
     { }
 
     size_t GetSize() override
-    { return m_bufferp->GetSize(); }
+    { 
+        XBuffer& buf = *m_bufp;
+        return buf.GetSize(); 
+    }
 
     size_t ReadBytes(size_t size, byte_t* outBytes) override
     { 
-        size_t readSize = m_bufferp->ReadBytes(m_readIndex, size, outBytes); 
-        m_readIndex += readSize;
-        return readSize;
+        XBuffer& buf = *m_bufp;
+        buf.ReadBytes(m_readIndex, size, outBytes); 
+        m_readIndex += size;
+        return size;
     }
 
 private:
-    std::shared_ptr<XBuffer> m_bufferp;
+    std::shared_ptr<XBuffer> m_bufp;
 
 private:
     size_t m_readIndex;

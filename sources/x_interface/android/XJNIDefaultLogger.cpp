@@ -2,7 +2,7 @@
 
 #include <x_interface/android/XJNIMacros.h>
 
-#include <x_foundation/XDefaultLogger.h>
+#include <x_foundation/XPlatform.h>
 
 using namespace xf;
 
@@ -15,7 +15,10 @@ JNIEXPORT void JNICALL X_JNI_FUNCTION(XDefaultLogger, Debugn)(JNIEnv* env, jobje
     const char* cTextPtr = env->GetStringUTFChars(jText, NULL);
     const char* cFilePathPtr = env->GetStringUTFChars(jFilePath, NULL);
     const char* cFuncNamePtr = env->GetStringUTFChars(jFuncName, NULL);
-    XDefaultLogger::GetDefaultLogger().Printn(X_LOG_DEBUG, cTextPtr, cFilePathPtr, jFileLineNum, cFuncNamePtr);
+
+    XLogger& logger = XPlatform::GetLogger();
+    logger.Print(X_LOG_DEBUG, cTextPtr, cFilePathPtr, jFileLineNum, cFuncNamePtr);
+
     env->ReleaseStringUTFChars(jText, cFuncNamePtr);
     env->ReleaseStringUTFChars(jText, cFilePathPtr);
     env->ReleaseStringUTFChars(jText, cTextPtr);

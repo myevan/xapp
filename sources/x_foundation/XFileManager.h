@@ -5,7 +5,7 @@
 
 #include <x_foundation/XText.h>
 #include <x_foundation/XString.h>
-#include <x_foundation/XFileStream.h>
+#include <x_foundation/XStream.h>
 
 #include <string>
 #include <memory>
@@ -35,7 +35,7 @@ public:
     void JoinPath2(const XString& head, const XString& tail, std::string& outResult);
 
 public:
-    virtual std::shared_ptr<XFileStream> OpenStream(const XString& uri);
+    virtual std::shared_ptr<XStream> OpenStream(const XString& uri);
 
 public:
     std::shared_ptr<XBinary>    LoadBinary(const XString& uri);

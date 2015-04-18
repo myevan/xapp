@@ -5,8 +5,6 @@
 
 #include <x_foundation/XFileManager.h>
 
-#include <limits.h>
-
 namespace xf { namespace posix {
 
 class XFileManager : public xf::XFileManager
@@ -18,9 +16,6 @@ public:
     XFileManager();
 
     void SetProgramArguments(int argCount, const char** args) override;
-
-private:
-    std::string m_programAbsPath;
 };
 
 } } // end_of_namespace:xf.ns

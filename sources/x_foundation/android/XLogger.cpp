@@ -18,13 +18,12 @@ static android_LogPriority X_LOG_TYPE_TO_ANDROID_LOG_PRIORITY[X_LOG_TYPE_COUNT] 
     ANDROID_LOG_DEBUG,
 };
 
-void XLogger::Printn(XLogType logType, const XString& text, const XString& filePath, int fileLineNum, const XString& funcName)
+void XLogger::Print(XLogType logType, const XString& text, const XString& filePath, int fileLineNum, const XString& funcName)
 {
     android_LogPriority androidLogPriority = X_LOG_TYPE_TO_ANDROID_LOG_PRIORITY[logType];
 
     const XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
     const XString& title = baseConfig.GetTitle();
-    const char* titlePtr = title.GetPtr();
 
     XString fileName = XPath::GetPathLeaf(filePath);
 
@@ -35,16 +34,16 @@ void XLogger::Printn(XLogType logType, const XString& text, const XString& fileP
     strSizer.AppendForm(16, "(%d):", fileLineNum);
     strSizer.AppendXStr(funcName);
 
-    size_t bufMaxLen = strSizer.GetLen();
-    char* bufPtr = (char*)alloca(bufMaxLen);
-    XStringBuilder strBuilder(bufPtr, bufMaxLen);
+    size_t bufSize = strSizer.GetSize();
+    char* bufChars = (char*)alloca(bufSize);
+    XStringBuilder strBuilder(bufChars, bufSize);
     strBuilder.AppendXStr(text);
     strBuilder.AppendCStr(" in ");
     strBuilder.AppendXStr(fileName);
     strBuilder.AppendForm(16, "(%d):", fileLineNum);
     strBuilder.AppendXStr(funcName);
 
-    __android_log_write(androidLogPriority, titlePtr, bufPtr);
+    __android_log_write(androidLogPriority, title, bufChars);
 }
 
 } } // end_of_namespace:xf.android

@@ -8,47 +8,47 @@ namespace xf {
 class XStringBuilder
 {
 public:
-    XStringBuilder(char* bufPtr, size_t maxLen)
-    : m_bufPtr(bufPtr)
-    , m_maxLen(maxLen)
-    , m_curPos(0)
+    XStringBuilder(char* bufChars, size_t capacity)
+    : m_bufChars(bufChars)
+    , m_capacity(capacity)
+    , m_size(0)
     {
-        if (m_maxLen > 1)
-            m_maxLen -= 1; // for last '\0' char
+        if (m_capacity > 1)
+            m_capacity -= 1; // for last '\0' char
     }
 
-    inline bool TryAppendCStr(const char* inPtr, size_t inLen)
+    inline bool TryAppendCStr(const char* inChars, size_t inSize)
     {
-        size_t nextPos = m_curPos + inLen;
-        if (nextPos >= m_maxLen)
+        size_t nextPos = m_size + inSize;
+        if (nextPos >= m_capacity)
         {
-            nextPos = m_maxLen;
+            nextPos = m_capacity;
         }
 
-        size_t copyLen = nextPos - m_curPos;
+        size_t copyLen = nextPos - m_size;
         if (copyLen == 0)
         {
             return false;
         }
 
-        const char* srcPtr = inPtr;
-        char* dstPtr = m_bufPtr + m_curPos;
+        const char* srcChars = inChars;
+        char* dstChars = m_bufChars + m_size;
         for (size_t i = 0; i != copyLen; ++i)
-            dstPtr[i] = srcPtr[i];
+            dstChars[i] = srcChars[i];
         
-        m_curPos = nextPos;
-        m_bufPtr[m_curPos] = '\0';
+        m_size = nextPos;
+        m_bufChars[m_size] = '\0';
         return true;
     }
 
     inline bool TryAppendChar(const char inChar)
     {
-        if (m_curPos == m_maxLen)
+        if (m_size == m_capacity)
             return false;
 
-        m_bufPtr[m_curPos] = inChar;
-        m_curPos++;
-        m_bufPtr[m_curPos] = '\0';
+        m_bufChars[m_size] = inChar;
+        m_size++;
+        m_bufChars[m_size] = '\0';
         return true;
     }
 
@@ -57,30 +57,30 @@ public:
         TryAppendChar(inChar);
     }
 
-    inline void AppendCStr(const char* inPtr)
+    inline void AppendCStr(const char* inChars)
     {
-        TryAppendCStr(inPtr, strlen(inPtr));
+        TryAppendCStr(inChars, strlen(inChars));
     }
 
-    inline void AppendXStr(const XString& in)
+    inline void AppendXStr(const XString& inStr)
     {
-        TryAppendCStr(in.GetPtr(), in.GetLen());
+        TryAppendCStr(inStr.GetChars(), inStr.GetSize());
     }
 
-    inline void AppendForm(size_t inMaxLen, const char* fmt, int value)
+    inline void AppendForm(size_t inCapacity, const char* fmt, int value)
     {
-        char* inBuf = (char*)alloca(inMaxLen);
+        char* inBuf = (char*)alloca(inCapacity);
         sprintf(inBuf, fmt, value);
         TryAppendCStr(inBuf, strlen(inBuf));
     }
     
-    inline const char* GetPtr() { return m_bufPtr; }
-    inline size_t GetLen() { return m_curPos; }
+    inline const char* GetChars() { return m_bufChars; }
+    inline size_t GetSize() { return m_size; }
 
 private:
-    char* m_bufPtr;
-    size_t m_maxLen;
-    size_t m_curPos;
+    char* m_bufChars;
+    size_t m_capacity;
+    size_t m_size;
 };
 
 } // end_of_namespace:xf
