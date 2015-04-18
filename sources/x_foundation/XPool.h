@@ -5,8 +5,10 @@
 
 #include <memory>
 
+namespace xf {
+
 template<typename T>
-class XPool
+class XPool 
 {
 public:
     static std::shared_ptr<T> NewObject()
@@ -34,5 +36,7 @@ public:
         }
     }
 };
+
+} // end_of_namespace:xf
 
 #endif 
