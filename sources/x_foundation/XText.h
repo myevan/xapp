@@ -15,14 +15,7 @@ public:
     {
     }
 
-    inline void MakeEndChar()
-    {
-        byte_t* bytes = GetBytes();
-        size_t size = GetSize();
-        size_t capacity = GetCapacity();
-        assert(size <= capacity);
-        bytes[size] = 0;
-    }
+    void WriteEndChar();
 
     inline char* GetChars() 
     { return (char*)GetBytes(); }

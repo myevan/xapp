@@ -18,7 +18,9 @@ set(COMMON_SOURCES
     StdAfx.cpp
     XString.cpp
     XBinary.cpp
+    XText.cpp
     XPath.cpp
+    XFileManager.cpp
     XBaseConfig.cpp)
 
 if (FORCE_POSIX)
