@@ -8,7 +8,7 @@ set(PUBLIC_HEADERS
     XFileStream.h
     XFileManager.h
     XLogType.h
-    ILogger.h
+    XLogger.h
     XDebugMacros.h
     XBaseConfig.h
     XPlatform.h)

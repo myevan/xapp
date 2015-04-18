@@ -3,11 +3,11 @@
 #ifndef __POSIX_X_LOGGER__
 #define __POSIX_X_LOGGER__
 
-#include <x_foundation/ILogger.h>
+#include <x_foundation/XLogger.h>
 
 namespace xf { namespace posix {
 
-class XLogger : public ILogger
+class XLogger : public xf::XLogger
 {
 public:
     virtual ~XLogger() {}

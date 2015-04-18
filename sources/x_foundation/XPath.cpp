@@ -8,7 +8,7 @@ namespace xf {
 XString XPath::GetPathLeaf(const XString& path)
 {
     size_t lastSepIndex = path.GetLastIndexOf('/');
-    return path.GetSliceRight(lastSepIndex);
+    return path.GetSliceRight(lastSepIndex + 1);
 }
 
 } // end_of_namespace:xf

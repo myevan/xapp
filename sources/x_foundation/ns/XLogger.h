@@ -3,11 +3,11 @@
 #ifndef __NS_X_LOGGER__
 #define __NS_X_LOGGER__
 
-#include <x_foundation/ILogger.h>
+#include <x_foundation/XLogger.h>
 
 namespace xf { namespace ns {
 
-class XLogger : public ILogger
+class XLogger : public xf::XLogger
 {
 public:
     virtual ~XLogger() {}

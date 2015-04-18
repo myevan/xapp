@@ -1,17 +1,17 @@
 #pragma once
 
-#ifndef __I_LOGGER__
-#define __I_LOGGER__
+#ifndef __X_LOGGER__
+#define __X_LOGGER__
 
 #include <x_foundation/XLogType.h>
 #include <x_foundation/XString.h>
 
 namespace xf {
 
-class ILogger
+class XLogger
 {
 public:
-    virtual ~ILogger() {}
+    virtual ~XLogger() {}
 
     virtual void Print(XLogType logType, const XString& text, const XString& filePath, int fileLineNum, const XString& funcName) = 0;
 };

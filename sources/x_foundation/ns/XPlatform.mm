@@ -7,7 +7,7 @@
 
 namespace xf {
 
-ILogger& XPlatform::GetLogger()
+XLogger& XPlatform::GetLogger()
 {
     static ns::XLogger s_logger;
     return s_logger;
