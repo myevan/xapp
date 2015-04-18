@@ -20,13 +20,35 @@ public:
     static XSystem& GetSystem();
 
 public:
-    virtual ~XSystem() {}
+    XSystem() 
+    : m_sep('/')
+    {}
 
-public:
-    virtual bool TryGetResourceAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath) { return false; }
+    virtual ~XSystem() 
+    {}
 
-    virtual XBinary* TryGetResourceBinary(const XString& dirRelPath, const XString& fileName) { return NULL; }
+    virtual void SetProgramArguments(int argCount, const char** args)
+    {}
 
+    const std::string& GetProgramPath() 
+    { return m_programAbsPath; }
+
+    virtual bool TryGetResourceAbsPath(const XString& dirRelPath, const XString& fileName, std::string& outAbsPath) 
+    { return false; }
+
+    virtual XBinary* TryGetResourceBinary(const XString& dirRelPath, const XString& fileName) 
+    { return NULL; }
+
+    void JoinPath2(const XString& head, const XString& tail, std::string& outResult)
+    {
+        size_t capacity = sizeof(m_sep);
+        capacity += head.GetSize();
+        capacity += tail.GetSize();
+        outResult.reserve(capacity);
+        outResult.assign(head.GetChars(), head.GetSize());
+        outResult += m_sep;
+        outResult.append(tail.GetChars(), tail.GetSize());
+    }
 
     std::shared_ptr<XBinary> LoadFileBinary(const XString& fileAbsPath)
     {
@@ -72,6 +94,12 @@ public:
         text.MakeEndChar();
         return textPtr; 
     }
+
+protected:
+    std::string m_programAbsPath;
+
+private:
+    char m_sep;
 };
 
 } // end_of_namespace:xf
