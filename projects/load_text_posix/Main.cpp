@@ -10,7 +10,7 @@ using namespace xf;
 int main(int argc, const char** argv)
 {
     auto& fileManager = XPlatform::GetFileManager();
-    auto textp = fileManager.LoadFileText("test.txt");
+    auto textp = fileManager.LoadText("test.txt");
     if (!textp)
     {
         x_debug("not_loaded_text");
