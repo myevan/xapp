@@ -26,6 +26,11 @@ public:
 
     const std::string& GetProgramPath();
 
+public:
+    bool TryParseURIScheme(const XString& uri, XString& outScheme);
+    bool TrySplitPath(const XString& path, XString& outBranch, XString& outLeaf);
+    void SplitPath(const XString& path, XString& outBranch, XString& outLeaf);
+
     void JoinPath2(const XString& head, const XString& tail, std::string& outResult);
 
 public:

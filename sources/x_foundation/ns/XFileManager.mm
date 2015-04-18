@@ -14,31 +14,33 @@ XFileManager::XFileManager()
 
 std::shared_ptr<XText> XFileManager::LoadText(const XString& uri)
 {
-    size_t schemeSepIndex;
-    if (!uri.TryGetFirstIndexOf(':', schemeSepIndex))
-        return std::shared_ptr<XText>();
-
-    XString scheme = uri.GetSliceLeft(schemeSepIndex);
-    if (scheme.Equals("app"))
+    XString scheme;
+    if (TryParseURIScheme(uri, scheme))
     {
-        size_t lastSlashIndex;
-        if (!uri.TryGetLastIndexOf('/', lastSlashIndex))
-            lastSlashIndex = schemeSepIndex;
+        if (scheme.Equals("app"))
+        {
+            const char* uriChars = uri.GetChars();
+            size_t uriSize = uri.GetSize();
+            size_t schemeSize = scheme.GetSize() + 1;
+            XString uriBody(uriChars + schemeSize, uriSize - schemeSize); 
+            
+            XString xDirPath;
+            XString xFileName;
+            SplitPath(uriBody, xDirPath, xFileName);
 
-        XString xFileName = uri.GetSliceRight(lastSlashIndex + 1);
-        XString xDirPath = uri.GetSlice(schemeSepIndex + 1, lastSlashIndex);
+            NSString* nDirPath = [NSString stringWithXString:xDirPath];
+            NSString* nFileName = [NSString stringWithXString:xFileName];
+            NSString* nFileAbsPath = [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirPath];
+            if (nFileAbsPath == nil) 
+                return std::shared_ptr<XText>();
 
-        NSString* nDirPath = [NSString stringWithXString:xDirPath];
-        NSString* nFileName = [NSString stringWithXString:xFileName];
-        NSString* nFileAbsPath = [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirPath];
-        if (nFileAbsPath == nil) 
-            return std::shared_ptr<XText>();
-
-        XString xFileAbsPath([nFileAbsPath UTF8String], [nFileAbsPath length]);
-        return xf::XFileManager::LoadText(xFileAbsPath);
+            XString xFileAbsPath([nFileAbsPath UTF8String], [nFileAbsPath length]);
+            return xf::XFileManager::LoadText(xFileAbsPath);
+        }
     }
-
     return std::shared_ptr<XText>();
 }
+
+
 
 } } // end_of_namespace:xf.ns

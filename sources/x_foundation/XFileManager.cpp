@@ -12,6 +12,36 @@ void XFileManager::SetProgramArguments(int argCount, const char** args)
 const std::string& XFileManager::GetProgramPath() 
 { return m_programAbsPath; }
 
+bool XFileManager::TryParseURIScheme(const XString& uri, XString& outScheme)
+{
+    size_t schemeSepIndex;
+    if (!uri.TryGetFirstIndexOf(':', schemeSepIndex))
+        return false;
+
+    outScheme = uri.GetSliceLeft(schemeSepIndex);
+    return true;
+}
+
+bool XFileManager::TrySplitPath(const XString& path, XString& outBranch, XString& outLeaf)
+{
+    size_t lastSlashIndex;
+    if (!path.TryGetLastIndexOf('/', lastSlashIndex))
+        return false;
+
+    outLeaf = path.GetSliceRight(lastSlashIndex + 1);
+    outBranch = path.GetSliceLeft(lastSlashIndex);
+    return true;
+}
+
+void XFileManager::SplitPath(const XString& path, XString& outBranch, XString& outLeaf)
+{
+    if (!TrySplitPath(path, outBranch, outLeaf))
+    {
+        outLeaf = path;
+        outBranch = XString::EMPTY;
+    }
+}
+
 void XFileManager::JoinPath2(const XString& head, const XString& tail, std::string& outResult)
 {
     size_t capacity = sizeof(m_sep);
