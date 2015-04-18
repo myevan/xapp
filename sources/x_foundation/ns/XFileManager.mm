@@ -1,20 +1,20 @@
 #include "StdAfx.h"
 
-#import "x_foundation/ns/XSystem.h"
+#import "x_foundation/ns/XFileManager.h"
 #import "x_foundation/ns/NSString+XString.h"
 
 using namespace xf;
 
 namespace xf { namespace ns {
 
-XSystem::XSystem()
+XFileManager::XFileManager()
 {
     m_mainBundle = [NSBundle mainBundle];
 }
 
-bool XSystem::TryGetResourceAbsPath(const XString& dirPath, const XString& fileName, std::string& outAbsPath)
+bool XFileManager::TryGetResourceAbsPath(const XString& dirPath, const XString& fileName, std::string& outAbsPath)
 {
-    NSString* nResAbsPath = XSystem::NSGetResourceAbsPath(dirPath, fileName);
+    NSString* nResAbsPath = XFileManager::NSGetResourceAbsPath(dirPath, fileName);
     if (nResAbsPath == nil) 
         return false;
 
@@ -23,16 +23,16 @@ bool XSystem::TryGetResourceAbsPath(const XString& dirPath, const XString& fileN
     return true;
 }
 
-XBinary* XSystem::TryGetResourceBinary(const XString& dirPath, const XString& fileName)
+XBinary* XFileManager::TryGetResourceBinary(const XString& dirPath, const XString& fileName)
 {
-    NSString* nResAbsPath = XSystem::NSGetResourceAbsPath(dirPath, fileName);
+    NSString* nResAbsPath = XFileManager::NSGetResourceAbsPath(dirPath, fileName);
     if (nResAbsPath == nil) 
         return NULL;
 
     return NULL; 
 }
 
-NSString* XSystem::NSGetResourceAbsPath(const XString& dirPath, const XString& fileName)
+NSString* XFileManager::NSGetResourceAbsPath(const XString& dirPath, const XString& fileName)
 {
     NSString* nDirPath = [NSString stringWithXString:dirPath];
     NSString* nFileName = [NSString stringWithXString:fileName];

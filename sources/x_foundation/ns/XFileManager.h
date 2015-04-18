@@ -1,19 +1,19 @@
 #pragma once
 
-#ifndef __NS_X_SYSTEM__
-#define __NS_X_SYSTEM__
+#ifndef __NS_X_FILE_MANAGER__
+#define __NS_X_FILE_MANAGER__
 
-#include <x_foundation/XSystem.h>
+#include <x_foundation/XFileManager.h>
 
 namespace xf { namespace ns {
 
-class XSystem : public xf::XSystem
+class XFileManager : public xf::XFileManager
 {
 public:
-    virtual ~XSystem() {}
+    virtual ~XFileManager() {}
 
 public:
-    XSystem();
+    XFileManager();
 
     bool TryGetResourceAbsPath(const XString& dirPath, const XString& fileName, std::string& outAbsPath) override;
 

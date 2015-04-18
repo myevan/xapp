@@ -5,12 +5,12 @@ set(PUBLIC_HEADERS
     XBinary.h
     XBuffer.h
     XText.h
-    XFileStream.h
     XURI.h
+    XFileStream.h
+    XFileManager.h
     XLogType.h
     ILogger.h
     XDebugMacros.h
-    XSystem.h
     XBaseConfig.h
     XPlatform.h)
 
@@ -23,14 +23,14 @@ set(COMMON_SOURCES
 if (FORCE_POSIX)
     set(CMAKE_CXX_FLAGS "-Wall -std=c++11")
     set(PLATFORM_SOURCES 
-        posix/XSystem.cpp
         posix/XLogger.cpp
+        posix/XFileManager.cpp
         posix/XPlatform.cpp)
 elseif (ANDROID)
     set(PLATFORM_SOURCES 
-        android/XAssetBinary.cpp
-        android/XSystem.cpp
         android/XLogger.cpp
+        android/XAssetBinary.cpp
+        android/XFileManager.cpp
         android/XPlatform.cpp)
 elseif (IOS OR MAC)
     set(PLATFORM_DIR ns)
@@ -38,8 +38,8 @@ elseif (IOS OR MAC)
         ns/NSString+XString.h)
     set(PLATFORM_SOURCES 
         ns/NSString+XString.mm
-        ns/XSystem.mm
         ns/XLogger.mm
+        ns/XFileManager.mm
         ns/XPlatform.mm)
 endif()
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef __X_SYSTEM__
-#define __X_SYSTEM__
+#ifndef __X_FILE_MANAGER__
+#define __X_FILE_MANAGER__
 
 #include <x_foundation/XURI.h>
 #include <x_foundation/XPool.h>
@@ -14,17 +14,14 @@
 
 namespace xf { 
 
-class XSystem
+class XFileManager
 {
 public:
-    static XSystem& GetSystem();
-
-public:
-    XSystem() 
+    XFileManager() 
     : m_sep('/')
     {}
 
-    virtual ~XSystem() 
+    virtual ~XFileManager() 
     {}
 
     virtual void SetProgramArguments(int argCount, const char** args)

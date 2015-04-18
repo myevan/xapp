@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 
-#include <x_foundation/posix/XSystem.h>
+#include <x_foundation/posix/XFileManager.h>
 
 #include <x_foundation/XDebugMacros.h>
 
@@ -8,11 +8,11 @@ using namespace xf;
 
 namespace xf { namespace posix {
 
-XSystem::XSystem()
+XFileManager::XFileManager()
 {
 }
 
-void XSystem::SetProgramArguments(int argCount, const char** args) 
+void XFileManager::SetProgramArguments(int argCount, const char** args) 
 {
     assert(argCount > 0);
     const char* cProgramRelPath = args[0];

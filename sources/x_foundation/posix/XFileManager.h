@@ -3,19 +3,19 @@
 #ifndef __POSIX_X_SYSTEM__
 #define __POSIX_X_SYSTEM__
 
-#include <x_foundation/XSystem.h>
+#include <x_foundation/XFileManager.h>
 
 #include <limits.h>
 
 namespace xf { namespace posix {
 
-class XSystem : public xf::XSystem
+class XFileManager : public xf::XFileManager
 {
 public:
-    virtual ~XSystem() {}
+    virtual ~XFileManager() {}
 
 public:
-    XSystem();
+    XFileManager();
 
     void SetProgramArguments(int argCount, const char** args) override;
 

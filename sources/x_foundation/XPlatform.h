@@ -4,7 +4,7 @@
 #define __X_PLATFORM__
 
 #include <x_foundation/ILogger.h>
-#include <x_foundation/XSystem.h>
+#include <x_foundation/XFileManager.h>
 
 namespace xf {
 
@@ -12,7 +12,7 @@ class XPlatform
 {
 public:
     static ILogger& GetLogger();
-    static XSystem& GetSystem();
+    static XFileManager& GetFileManager();
 };
 
 } // end_of_namespace:xf

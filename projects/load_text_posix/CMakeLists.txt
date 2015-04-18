@@ -16,6 +16,8 @@ set(SOURCES
 set(LIBRARIES
     x_foundation)
 
+set(CMAKE_CXX_FLAGS "-Wall -std=c++11")
+
 include_directories("${CMAKE_SOURCE_DIR}/../../__platforms/posix/include")
 link_directories("${CMAKE_SOURCE_DIR}/../../__platforms/posix/lib/static")
 

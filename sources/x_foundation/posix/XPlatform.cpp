@@ -3,7 +3,7 @@
 #include <x_foundation/XPlatform.h>
 
 #include <x_foundation/posix/XLogger.h>
-#include <x_foundation/posix/XSystem.h>
+#include <x_foundation/posix/XFileManager.h>
 
 namespace xf {
 
@@ -13,10 +13,10 @@ ILogger& XPlatform::GetLogger()
     return s_logger;
 }
 
-XSystem& XPlatform::GetSystem()
+XFileManager& XPlatform::GetFileManager()
 {
-    static posix::XSystem s_system;
-    return s_system;
+    static posix::XFileManager s_fileManager;
+    return s_fileManager;
 }
 
 } // end_of_namespace:xf

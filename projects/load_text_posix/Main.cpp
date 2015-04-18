@@ -9,14 +9,14 @@ using namespace xf;
 
 int main(int argc, const char** argv)
 {
-    XSystem& system = XPlatform::GetSystem();
-    std::shared_ptr<XText> textPtr = system.LoadFileText("test.txt");
-    if (!textPtr)
+    auto& fileManager = XPlatform::GetFileManager();
+    auto textp = fileManager.LoadFileText("test.txt");
+    if (!textp)
     {
         x_debug("not_loaded_text");
         return -1;
     }
     
-    x_debug(textPtr->GetChars());
+    x_debug(textp->GetChars());
     return 0;
 }

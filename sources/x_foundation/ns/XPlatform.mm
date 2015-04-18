@@ -3,7 +3,7 @@
 #include <x_foundation/XDefaultLogger.h>
 
 #include <x_foundation/ns/XLogger.h>
-#include <x_foundation/ns/XSystem.h>
+#include <x_foundation/ns/XFileManager.h>
 
 namespace xf {
 
@@ -13,10 +13,10 @@ ILogger& XPlatform::GetLogger()
     return s_logger;
 }
 
-XSystem& XPlatform::GetSystem()
+XFileManager& XPlatform::GetFileManager()
 {
-    static ns::XSystem s_system;
-    return s_system;
+    static ns::XFileManager s_fileManager;
+    return s_fileManager;
 }
 
 } // end_of_namespace:xf
