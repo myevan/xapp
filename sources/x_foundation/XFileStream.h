@@ -4,10 +4,11 @@
 #define __X_FILE_STREAM__
 
 #include <x_foundation/XTypes.h>
+#include <x_foundation/XStream.h>
 
 namespace xf {
 
-class XFileStream
+class XFileStream : public XStream
 {
 public:
     XFileStream()
@@ -38,7 +39,7 @@ public:
         return true;
     }
 
-    size_t GetSize()
+    size_t GetSize() override
     {
         size_t curPos = ftell(m_filePtr);
         fseek(m_filePtr, 0, SEEK_END);
@@ -47,7 +48,7 @@ public:
         return endPos;
     }
 
-    size_t ReadBytes(size_t byteCount, byte_t* outBytes)
+    size_t ReadBytes(size_t byteCount, byte_t* outBytes) override
     {
         return fread(outBytes, 1, byteCount, m_filePtr);
     }
