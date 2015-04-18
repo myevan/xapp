@@ -13,7 +13,7 @@ class ILogger
 public:
     virtual ~ILogger() {}
 
-    virtual void Printn(XLogType logType, const XString& text, const XString& filePath, int fileLineNum, const XString& funcName) = 0;
+    virtual void Print(XLogType logType, const XString& text, const XString& filePath, int fileLineNum, const XString& funcName) = 0;
 };
 
 } // end_of_namespace:xf

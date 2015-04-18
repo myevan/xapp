@@ -8,8 +8,8 @@ set(PUBLIC_HEADERS
     XFileStream.h
     XURI.h
     XLogType.h
-    XLogMacros.h
     ILogger.h
+    XDebugMacros.h
     XDefaultLogger.h
     XSystem.h
     XBaseConfig.h)

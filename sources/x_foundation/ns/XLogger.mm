@@ -6,7 +6,7 @@
 
 namespace xf { namespace ns {
 
-void XLogger::Printn(XLogType logType, const XString& xText, const XString& xFilePath, int fileLineNum, const XString& xFuncName)
+void XLogger::Print(XLogType logType, const XString& xText, const XString& xFilePath, int fileLineNum, const XString& xFuncName)
 {
     XString xFileName = XPath::GetPathLeaf(xFilePath);
 

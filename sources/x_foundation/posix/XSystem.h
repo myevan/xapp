@@ -17,15 +17,7 @@ public:
 public:
     XSystem();
 
-    void SetProgramArguments(int argCount, const char** args) override
-    {
-        assert(argCount > 0);
-        const char* cProgramRelPath = args[0];
-        char cProgramAbsPath[PATH_MAX];
-        x_verifyn(realpath(cProgramRelPath, cProgramAbsPath), "CHECK_PROGRAM_REL_PATH");
-
-        m_programAbsPath = cProgramAbsPath;
-    }
+    void SetProgramArguments(int argCount, const char** args) override;
 
 private:
     std::string m_programAbsPath;
