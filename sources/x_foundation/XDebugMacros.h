@@ -3,6 +3,7 @@
 #ifndef __X_DEBUG_MACROS__
 #define __X_DEBUG_MACROS__
 
+#include <assert.h>
 #include <x_foundation/XPlatform.h>
 
 #define x_assert(expr)          assert(expr)
