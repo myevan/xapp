@@ -7,10 +7,10 @@
 using namespace xf;
 
 extern "C" {
-    JNIEXPORT void JNICALL X_JNI_FUNCTION(XDefaultLogger, Debugn)(JNIEnv* env, jobject thiz, jstring jText, jstring jFilePath, jint jFileLineNum, jstring jFuncName);
+    JNIEXPORT void JNICALL X_JNI_FUNCTION(XDefaultLogger, Debug)(JNIEnv* env, jobject thiz, jstring jText, jstring jFilePath, jint jFileLineNum, jstring jFuncName);
 };
 
-JNIEXPORT void JNICALL X_JNI_FUNCTION(XDefaultLogger, Debugn)(JNIEnv* env, jobject thiz, jstring jText, jstring jFilePath, jint jFileLineNum, jstring jFuncName)
+JNIEXPORT void JNICALL X_JNI_FUNCTION(XDefaultLogger, Debug)(JNIEnv* env, jobject thiz, jstring jText, jstring jFilePath, jint jFileLineNum, jstring jFuncName)
 {
     const char* cTextPtr = env->GetStringUTFChars(jText, NULL);
     const char* cFilePathPtr = env->GetStringUTFChars(jFilePath, NULL);
