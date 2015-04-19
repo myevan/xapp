@@ -1,5 +1,5 @@
 macro(ndk_gdb_debuggable TARGET_NAME)
-    get_property(TARGET_LOCATION TARGET ${TARGET_NAME} PROPERTY LOCATION)
+    set(TARGET_LOCATION $<TARGET_FILE:${TARGET_NAME}>)
 
     # create custom target that depends on the real target so it gets executed afterwards
     add_custom_target(NDK_GDB ALL) 
@@ -9,7 +9,7 @@ macro(ndk_gdb_debuggable TARGET_NAME)
     
     # 1. generate essential Android Makefiles
     file(WRITE ${ANDROID_PROJECT_DIR}/jni/Android.mk "APP_ABI := ${ANDROID_NDK_ABI_NAME}\n")
-    file(WRITE ${ANDROID_NDK_ABI_NAME}/jni/Application.mk "APP_ABI := ${ANDROID_NDK_ABI_NAME}\n")
+    file(WRITE ${ANDROID_PROJECT_DIR}/jni/Application.mk "APP_ABI := ${ANDROID_NDK_ABI_NAME}\n")
 
     # 2. generate gdb.setup
     get_directory_property(PROJECT_INCLUDES DIRECTORY ${PROJECT_SOURCE_DIR} INCLUDE_DIRECTORIES)
