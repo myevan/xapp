@@ -17,18 +17,19 @@ public class MainActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        XDefaultLogger.Debug("test");
 
-        XDefaultLogger.Debugn("test");
-
-        XDefaultLogger.Debugn("bind");
+/*
+        XDefaultLogger.Debug("bind");
 
         AssetManager assetManager = getAssets();
         XSystem.BindAssetManager(assetManager);
 
-        XDefaultLogger.Debugn("show");
-
+        XDefaultLogger.Debug("show");
+*/
         TextView  tv = new TextView(this);
-        tv.setText(XBaseConfig.GetTitle() + ":" + XSystem.GetABIName());
+        //tv.setText(XBaseConfig.GetTitle() + ":" + XSystem.GetABIName());
+        tv.setText("test");
         setContentView(tv);
     }
 }
