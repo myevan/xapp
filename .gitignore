@@ -6,6 +6,7 @@ __platforms
 projects/*_android/local.properties
 projects/*_android/bin/*
 projects/*_android/gen/*
+projects/*_android/obj/*
 projects/*_android/libs/*
 projects/*_android/assets/*
 project.xcworkspace
