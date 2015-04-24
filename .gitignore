@@ -2,6 +2,7 @@ d
 l
 t
 __builds
+__prebuilts
 __platforms
 projects/*_android/local.properties
 projects/*_android/bin/*
