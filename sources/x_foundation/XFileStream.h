@@ -30,9 +30,9 @@ public:
         }
     }
 
-    bool Open(const XString& fileAbsPath)
+    bool Open(const XPath& fileAbsPath)
     {
-        m_filePtr = fopen(fileAbsPath, "rb");
+        m_filePtr = fopen(fileAbsPath.GetChars(), "rb");
         if (!m_filePtr)
             return false;
 

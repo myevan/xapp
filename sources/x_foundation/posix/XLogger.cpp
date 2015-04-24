@@ -1,14 +1,12 @@
 #include <x_foundation/posix/XLogger.h>
 
-#include <x_foundation/XPath.h>
-
 #include <stdio.h>
 
 namespace xf { namespace posix {
 
 void XLogger::Print(XLogType logType, const XString& xText, const XString& xFilePath, int fileLineNum, const XString& xFuncName)
 {
-    XString xFileName = XPath::GetPathLeaf(xFilePath);
+    XString xFileName = xFilePath.GetLeaf("/\\");
 
     const char* cText = xText;
     const char* cFileName = xFileName;

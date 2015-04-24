@@ -25,7 +25,7 @@ void XLogger::Print(XLogType logType, const XString& text, const XString& filePa
     const XBaseConfig& baseConfig = XBaseConfig::GetBaseConfig();
     const XString& title = baseConfig.GetTitle();
 
-    XString fileName = XPath::GetPathLeaf(filePath);
+    XString fileName = filePath.GetLeaf('/');
 
     XStringSizer strSizer;
     strSizer.AppendXStr(text);

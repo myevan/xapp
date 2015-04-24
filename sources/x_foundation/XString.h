@@ -80,6 +80,15 @@ public:
 
         return retIndex;
     }
+
+    inline size_t GetLastIndexOf(const char* inCharCodes) const
+    {
+        size_t retIndex;
+        if (!TryGetLastIndexOf(inCharCodes, retIndex))
+            return (size_t)-1;
+
+        return retIndex;
+    }
     
     inline XString GetSlice(size_t leftIndex, size_t rightIndex) const
     {
@@ -111,7 +120,59 @@ public:
         return XString(m_chars + index, m_size - index); 
     }
 
+    inline XString GetLeaf(const char* seps) const
+    {
+        size_t lastSepIndex = GetLastIndexOf(seps);
+        return GetSliceRight(lastSepIndex + 1);
+    }
+
+    inline XString GetLeaf(char sep) const
+    {
+        size_t lastSepIndex = GetLastIndexOf(sep);
+        return GetSliceRight(lastSepIndex + 1);
+    }
+
+    inline XString GetBranch(char sep) const
+    {
+        size_t lastSepIndex = GetLastIndexOf(sep);
+        return GetSliceLeft(lastSepIndex);
+    }
+
+    inline XString GetHead(char sep) const
+    {
+        size_t firstSepIndex = GetFirstIndexOf(sep);
+        return GetSliceLeft(firstSepIndex);
+    }
+
+    inline XString GetTail(char sep) const
+    {
+        size_t firstSepIndex = GetFirstIndexOf(sep);
+        return GetSliceRight(firstSepIndex + 1);
+    }
+
 public:
+    inline bool TrySplitHeadAndTail(char sep, XString& outHead, XString& outTail)
+    {
+        size_t firstSepIndex;
+        if (!TryGetFirstIndexOf(sep, firstSepIndex))
+            return false;
+
+        outTail = GetSliceRight(firstSepIndex + 1);
+        outHead = GetSliceLeft(firstSepIndex);
+        return true;
+    }
+
+    inline bool TrySplitBranchAndLeaf(char sep, XString& outBranch, XString& outLeaf)
+    {
+        size_t lastSepIndex;
+        if (!TryGetLastIndexOf(sep, lastSepIndex))
+            return false;
+
+        outLeaf = GetSliceRight(lastSepIndex + 1);
+        outBranch = GetSliceLeft(lastSepIndex);
+        return true;
+    }
+
     inline bool TryGetFirstIndexOf(char inCharCode, size_t& outIndex) const
     {
         const char* baseCharPtr = m_chars;
@@ -155,6 +216,27 @@ public:
         return false;
     }
 
+    inline bool TryGetLastIndexOf(const char* inCharCodes, size_t& outIndex) const
+    {
+        const char* baseCharPtr = m_chars;
+        const char* eachCharPtr = m_chars + m_size;
+        if (baseCharPtr == eachCharPtr)
+            return false;
+
+        eachCharPtr--;
+
+        while (eachCharPtr != baseCharPtr)
+        {
+            if (strchr(inCharCodes, *eachCharPtr))
+            {
+                outIndex = (eachCharPtr - baseCharPtr);
+                return true;        
+            }
+            eachCharPtr--;
+        }
+
+        return false;
+    }
 
 private:
     const char* m_chars;

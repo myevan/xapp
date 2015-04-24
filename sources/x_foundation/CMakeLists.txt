@@ -5,6 +5,7 @@ set(PUBLIC_HEADERS
     XBinary.h
     XBuffer.h
     XText.h
+    XPath.h
     XStream.h
     XBufferStream.h
     XFileStream.h

@@ -1,8 +1,10 @@
 #include "StdAfx.h"
 
-#include <x_foundation/posix/XFileManager.h>
+#include "XFileManager.h"
 
-#include <x_foundation/XDebugMacros.h>
+#include "../XPool.h"
+#include "../XFileStream.h"
+#include "../XDebugMacros.h"
 
 using namespace xf;
 
@@ -12,14 +14,41 @@ XFileManager::XFileManager()
 {
 }
 
-void XFileManager::SetProgramArguments(int argCount, const char** args) 
+void XFileManager::SetProgramPath(const XString& programPath) 
 {
-    assert(argCount > 0);
-    const char* cProgramRelPath = args[0];
-    char cProgramAbsPath[PATH_MAX];
-    x_verify(realpath(cProgramRelPath, cProgramAbsPath), "CHECK_PROGRAM_REL_PATH");
+    char programAbsPathChars[PATH_MAX];
+    x_verify(realpath(programPath.GetChars(), programAbsPathChars), "CHECK_PROGRAM_REL_PATH");
 
-    m_programAbsPath = cProgramAbsPath;
+    xf::XFileManager::SetProgramPath(programAbsPathChars);
+}
+
+std::shared_ptr<XStream> XFileManager::OpenStream(const XString& uri)
+{
+    XString uriBody;
+    XString uriScheme;
+    if (TryParseURI(uri, uriScheme, uriBody))
+    {
+        if (uriScheme.Equals("app"))
+        {
+            return OpenFileStream(m_appDirAbsPath, uriBody);
+        }
+    }
+    return std::shared_ptr<XStream>();
+}
+
+std::shared_ptr<XStream> XFileManager::OpenFileStream(const XPath& branchAbsPath, const XString& leaf)
+{
+    XPath fileAbsPath(branchAbsPath);
+    if (!fileAbsPath.TryAppendXStr(leaf))
+        return std::shared_ptr<XFileStream>();
+
+    x_debug(fileAbsPath.GetChars());
+    std::shared_ptr<XFileStream> streamp = XPool<XFileStream>::NewObject();
+    XFileStream& stream = *streamp;
+    if (!stream.Open(fileAbsPath))
+        return std::shared_ptr<XFileStream>();
+
+    return streamp;
 }
 
 } } // end_of_namespace:xf.ns

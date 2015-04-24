@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 
-#include <x_foundation/XString.h>
+#include "XString.h"
 
 namespace xf {
 

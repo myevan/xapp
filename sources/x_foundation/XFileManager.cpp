@@ -1,15 +1,17 @@
 #include "StdAfx.h"
 #include "XFileManager.h"
 #include "XFileStream.h"
+#include "XDebugMacros.h"
 #include "XPool.h"
 
 namespace xf { 
 
-void XFileManager::SetProgramArguments(int argCount, const char** args)
-{}
+void XFileManager::SetProgramPath(const XString& programPath)
+{
+    x_verify(m_appDirAbsPath.TryAssignXStrBranch(programPath), "TOO_LONG_PROGRAM_PATH_BRANCH");
 
-const std::string& XFileManager::GetProgramPath() 
-{ return m_programAbsPath; }
+    x_verify(m_appDirAbsPath.TryAppendSep(), "TOO_LONG_APP_DIR_ABS_PATH");
+}
 
 bool XFileManager::TryParseURI(const XString& uri, XString& outScheme, XString& outBody)
 {
@@ -20,47 +22,6 @@ bool XFileManager::TryParseURI(const XString& uri, XString& outScheme, XString& 
     outScheme = uri.GetSliceLeft(schemeSepIndex);
     outBody = uri.GetSliceRight(schemeSepIndex + 1);
     return true;
-}
-
-bool XFileManager::TrySplitPath(const XString& path, XString& outBranch, XString& outLeaf)
-{
-    size_t lastSlashIndex;
-    if (!path.TryGetLastIndexOf('/', lastSlashIndex))
-        return false;
-
-    outLeaf = path.GetSliceRight(lastSlashIndex + 1);
-    outBranch = path.GetSliceLeft(lastSlashIndex);
-    return true;
-}
-
-void XFileManager::SplitPath(const XString& path, XString& outBranch, XString& outLeaf)
-{
-    if (!TrySplitPath(path, outBranch, outLeaf))
-    {
-        outLeaf = path;
-        outBranch = XString::EMPTY;
-    }
-}
-
-void XFileManager::JoinPath2(const XString& head, const XString& tail, std::string& outResult)
-{
-    size_t capacity = sizeof(m_sep);
-    capacity += head.GetSize();
-    capacity += tail.GetSize();
-    outResult.reserve(capacity);
-    outResult.assign(head.GetChars(), head.GetSize());
-    outResult += m_sep;
-    outResult.append(tail.GetChars(), tail.GetSize());
-}
-
-std::shared_ptr<XStream> XFileManager::OpenStream(const XString& uri)
-{
-    std::shared_ptr<XFileStream> streamp = XPool<XFileStream>::NewObject();
-    XFileStream& stream = *streamp;
-    if (!stream.Open(uri))
-        return std::shared_ptr<XFileStream>();
-
-    return streamp;
 }
 
 std::shared_ptr<XBinary> XFileManager::LoadBinary(const XString& uri)
