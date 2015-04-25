@@ -34,6 +34,9 @@ public:
     {}
 
 public:
+    inline bool IsEmpty() const
+    { return m_size == 0; }
+
     inline const char* GetChars() const 
     { return m_chars; }
 

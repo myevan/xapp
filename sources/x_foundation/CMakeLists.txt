@@ -2,6 +2,7 @@ set(PUBLIC_HEADERS
     XTypes.h
     XPool.h
     XString.h
+    XStringBuilder.h
     XBinary.h
     XBuffer.h
     XText.h

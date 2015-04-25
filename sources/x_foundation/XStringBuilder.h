@@ -8,8 +8,8 @@ namespace xf {
 class XStringBuilder
 {
 public:
-    XStringBuilder(char* bufChars, size_t capacity)
-    : m_bufChars(bufChars)
+    XStringBuilder(char* chars, size_t capacity)
+    : m_chars(chars)
     , m_capacity(capacity)
     , m_size(0)
     {
@@ -32,12 +32,12 @@ public:
         }
 
         const char* srcChars = inChars;
-        char* dstChars = m_bufChars + m_size;
+        char* dstChars = m_chars + m_size;
         for (size_t i = 0; i != copyLen; ++i)
             dstChars[i] = srcChars[i];
         
         m_size = nextPos;
-        m_bufChars[m_size] = '\0';
+        m_chars[m_size] = '\0';
         return true;
     }
 
@@ -46,9 +46,9 @@ public:
         if (m_size == m_capacity)
             return false;
 
-        m_bufChars[m_size] = inChar;
+        m_chars[m_size] = inChar;
         m_size++;
-        m_bufChars[m_size] = '\0';
+        m_chars[m_size] = '\0';
         return true;
     }
 
@@ -74,11 +74,17 @@ public:
         TryAppendCStr(inBuf, strlen(inBuf));
     }
     
-    inline const char* GetChars() { return m_bufChars; }
-    inline size_t GetSize() { return m_size; }
+    inline const char* GetChars() 
+    { return m_chars; }
+
+    inline size_t GetSize() 
+    { return m_size; }
+
+    inline XString ToString()
+    { return XString(m_chars, m_size); }
 
 private:
-    char* m_bufChars;
+    char* m_chars;
     size_t m_capacity;
     size_t m_size;
 };
