@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(lua)
+project(lua_posix)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../../cmakes")
 
 set(DATA_DIR "${CMAKE_SOURCE_DIR}/../lua_data")
+
+set(CMAKE_SKIP_RPATH ON)
 
 set(DATA_FILES 
     "${DATA_DIR}/main.lua")
@@ -28,14 +30,13 @@ link_directories("${CMAKE_SOURCE_DIR}/../../__platforms/posix/lib/static")
 link_directories("${CMAKE_SOURCE_DIR}/../../__prebuilts/posix/lua-5.1.5/lib")
 link_directories("${CMAKE_SOURCE_DIR}/../../__prebuilts/posix/lua_tinker-143aa248081/lib")
 
-add_executable(lua ${SOURCES})
-set_target_properties(lua PROPERTIES OUTPUT_NAME lua_posix)
-set_target_properties(lua PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "StdAfx.h")
-target_link_libraries(lua ${LIBRARIES})
+add_executable(lua_posix ${SOURCES})
+set_target_properties(lua_posix PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "StdAfx.h")
+target_link_libraries(lua_posix ${LIBRARIES})
 
 include(cotire)
-cotire(lua)
+cotire(lua_posix)
 
-install(TARGETS lua RUNTIME DESTINATION bin)
+install(TARGETS lua_posix RUNTIME DESTINATION bin)
 
-file(COPY ${DATA_FILES} DESTINATION "${CMAKE_SOURCE_DIR}/../../__platforms/posix/bin")
+install(FILES ${DATA_FILES} DESTINATION bin)
