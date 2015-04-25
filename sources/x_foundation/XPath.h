@@ -11,7 +11,8 @@ class XPath
 {
 public:
     XPath();
-    XPath(const char* str);
+    XPath(const char* strChars);
+    XPath(const char* strChars, size_t strLen);
     XPath(const XString& str);
 
     void AssignPath(const XPath& path);

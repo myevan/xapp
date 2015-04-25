@@ -10,10 +10,16 @@ namespace xf { namespace ns {
 class XFileManager : public xf::XFileManager
 {
 public:
-    virtual ~XFileManager() {}
+    XFileManager();
 
 public:
-    XFileManager();
+    virtual ~XFileManager() {}
+
+    void SetExecFilePath(const XPath& execFilePath)
+    {}
+
+    void SetDataDirPath(const XPath& dataDirPath)
+    {}
 
 public:
     std::shared_ptr<XStream> OpenStream(const XString& uri) override;

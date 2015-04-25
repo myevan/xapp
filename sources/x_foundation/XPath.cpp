@@ -11,9 +11,14 @@ XPath:: XPath()
 {
 }
 
-XPath::XPath(const char* str)
+XPath::XPath(const char* strChars)
 {
-    m_str = str;
+    m_str = strChars;
+}
+
+XPath::XPath(const char* strChars, size_t strLen)
+{
+    m_str.assign(strChars, strLen);
 }
 
 XPath::XPath(const XString& str)

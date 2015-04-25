@@ -1,7 +1,10 @@
 #include "StdAfx.h"
 
-#import "x_foundation/ns/XFileManager.h"
-#import "x_foundation/ns/NSString+XString.h"
+#import "XFileManager.h"
+#import "NSString+XString.h"
+
+#import "../XFileStream.h"
+#import "../XPool.h"
 
 using namespace xf;
 
@@ -18,19 +21,27 @@ std::shared_ptr<XStream> XFileManager::OpenStream(const XString& uri)
     XString uriScheme;
     if (TryParseURI(uri, uriScheme, uriBody))
     {
-        if (uriScheme.Equals("app"))
+        if (uriScheme.Equals("data"))
         {
             XString xDirPath;
             XString xFileName;
-            SplitPath(uriBody, xDirPath, xFileName);
+            if (!uriBody.TrySplitBranchAndLeaf('/', xDirPath, xFileName))
+                xFileName = uriBody;
 
             NSString* nDirPath = [NSString stringWithXString:xDirPath];
             NSString* nFileName = [NSString stringWithXString:xFileName];
             NSString* nFileAbsPath = [m_mainBundle pathForResource:nFileName ofType:nil inDirectory:nDirPath];
             if (nFileAbsPath != nil) 
             {
-                XString xFileAbsPath([nFileAbsPath UTF8String], [nFileAbsPath length]);
-                return xf::XFileManager::OpenStream(xFileAbsPath);
+                const char* fileAbsPathChars = [nFileAbsPath UTF8String];
+                const size_t fileAbsPathLen = [nFileAbsPath length];
+                XPath fileAbsPath(fileAbsPathChars, fileAbsPathLen);
+                std::shared_ptr<XFileStream> streamp = XPool<XFileStream>::NewObject();
+                XFileStream& stream = *streamp;
+                if (!stream.Open(fileAbsPath))
+                    return std::shared_ptr<XFileStream>();
+
+    return streamp;
             }
         }
     }
