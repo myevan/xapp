@@ -15,6 +15,7 @@ set(SOURCES
 
 set(LIBRARIES
     x_foundation
+    x_interface
     lua_static
     lua_tinker_static)
 

@@ -1,3 +1,13 @@
+set(PUBLIC_HEADERS
+    XLua.h)
+
+set(COMMON_SOURCES
+    XLua.cpp
+    StdAfx.cpp)
+
+set(COMMON_LIBRARIES
+    x_foundation)
+
 macro(ndk_gdb_debuggable TARGET_NAME)
     set(TARGET_LOCATION $<TARGET_FILE:${TARGET_NAME}>)
 
@@ -28,28 +38,50 @@ macro(ndk_gdb_debuggable TARGET_NAME)
     add_custom_command(TARGET NDK_GDB POST_BUILD COMMAND ${CMAKE_STRIP} ${TARGET_LOCATION})
 endmacro()
 
-if (ANDROID)
+if (FORCE_POSIX)
+    set(CMAKE_CXX_FLAGS "-Wall -std=c++11")
+elseif (ANDROID)
     set(PLATFORM_SOURCES 
         StdAfx.cpp
         android/XJNIDefaultLogger.cpp
         android/XJNIBaseConfig.cpp
         android/XJNISystem.cpp)
 
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+    set(PLATFORM_LIBRARIES
+        log
+        android)
 
     add_definitions(
         -DJNI_PACKAGE_NAME=${JNI_PACKAGE_NAME} 
         -DJNI_CLASS_NAME=${JNI_CLASS_NAME})
 
-    add_library(x_interface SHARED ${COMMON_SOURCES} ${PLATFORM_SOURCES})
-    target_link_libraries(x_interface x_foundation android log)
-    set_target_properties(x_interface PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "StdAfx.h")
-    cotire(x_interface)
-    ndk_gdb_debuggable(x_interface)
-
-    install(TARGETS x_interface 
-            RUNTIME DESTINATION bin
-            LIBRARY DESTINATION lib
-            ARCHIVE DESTINATION lib/static)
 endif()
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories("${PROJECT_SOURCE_DIR}/__prebuilts/posix/lua-5.1.5/include")
+include_directories("${PROJECT_SOURCE_DIR}/__prebuilts/posix/lua_tinker-143aa248081/include")
+link_directories("${PROJECT_SOURCE_DIR}/__prebuilts/posix/lua-5.1.5/lib")
+link_directories("${PROJECT_SOURCE_DIR}/__prebuilts/posix/lua_tinker-143aa248081/lib")
+
+if (ANDROID)
+    add_library(x_interface SHARED ${COMMON_SOURCES} ${PLATFORM_SOURCES})
+else()
+    add_library(x_interface STATIC ${COMMON_SOURCES} ${PLATFORM_SOURCES})
+endif()
+
+target_link_libraries(x_interface ${COMMON_LIBRARIES} ${PLATFORM_LIBRARIES})
+set_target_properties(x_interface PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "StdAfx.h")
+cotire(x_interface)
+
+if (ANDROID)
+    ndk_gdb_debuggable(x_interface)
+endif()
+
+install(
+    FILES ${PUBLIC_HEADERS} 
+    DESTINATION include/x_interface)
+
+install(TARGETS x_interface 
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib/static)
