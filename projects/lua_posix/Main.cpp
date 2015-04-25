@@ -16,7 +16,7 @@ int main(int argc, const char** argv)
 {
     auto& fileManager = XPlatform::GetFileManager();
     fileManager.SetExecFilePath(argv[0]);
-    fileManager.SetDataDirPath("./");
+    fileManager.SetDataDirPath("../data/lua_posix");
 
     lua_State* L = lua_open();
 

@@ -39,4 +39,4 @@ cotire(lua_posix)
 
 install(TARGETS lua_posix RUNTIME DESTINATION bin)
 
-install(FILES ${DATA_FILES} DESTINATION bin)
+install(FILES ${DATA_FILES} DESTINATION data/lua_posix)
