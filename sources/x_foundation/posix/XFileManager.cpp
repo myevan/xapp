@@ -57,9 +57,7 @@ std::shared_ptr<XStream> XFileManager::OpenFileStream(const XPath& branchAbsPath
 {
     XPath fileAbsPath(branchAbsPath);
     fileAbsPath.AppendXStr(leaf);
-    x_debug(fileAbsPath.ToXStr());
 
-    x_debug(fileAbsPath.GetChars());
     std::shared_ptr<XFileStream> streamp = XPool<XFileStream>::NewObject();
     XFileStream& stream = *streamp;
     if (!stream.Open(fileAbsPath))
