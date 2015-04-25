@@ -69,8 +69,6 @@ int XLua::DoFile(lua_State* L)
     if (!modulePath)
         return luaL_error(L, "NOT_PASS_LUA_MODULE_PATH");
 
-    x_debug(modulePath);
-
     char moduleUri[512];
     sprintf(moduleUri, "data:%s", modulePath);
 
