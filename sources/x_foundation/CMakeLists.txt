@@ -13,6 +13,7 @@ set(PUBLIC_HEADERS
     XFileManager.h
     XLogType.h
     XLogger.h
+    XStdMacros.h
     XDebugMacros.h
     XBaseConfig.h
     XPlatform.h)

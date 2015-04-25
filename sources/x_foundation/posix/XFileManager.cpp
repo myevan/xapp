@@ -14,12 +14,29 @@ XFileManager::XFileManager()
 {
 }
 
-void XFileManager::SetProgramPath(const XString& programPath) 
+void XFileManager::SetExecFilePath(const XPath& execFilePath) 
 {
-    char programAbsPathChars[PATH_MAX];
-    x_verify(realpath(programPath.GetChars(), programAbsPathChars), "CHECK_PROGRAM_REL_PATH");
+    char execFileAbsPathChars[PATH_MAX];
+    x_verify(realpath(execFilePath.GetChars(), execFileAbsPathChars), "CHECK_EXEC_PATH"); // TODO: x_vertifyf
+    m_execFileAbsPath.AssignXStr(execFileAbsPathChars);
+    m_execFileAbsPath.SplitBranchAndLeaf(m_execDirAbsPath, m_execFileName);
+}
 
-    xf::XFileManager::SetProgramPath(programAbsPathChars);
+void XFileManager::SetDataDirPath(const XPath& dataDirPath) 
+{
+    if (dataDirPath.IsRelPath())
+    {
+        size_t relNodeCount;
+        XPath leafPath;
+        dataDirPath.GetLeafExceptRelNodes(relNodeCount, leafPath);
+        m_execDirAbsPath.GetBranchExceptLeafs(relNodeCount, m_dataDirAbsPath);
+        m_dataDirAbsPath.AppendPath(leafPath);
+    }
+    else
+    {
+        m_dataDirAbsPath.AssignPath(m_execDirAbsPath);
+        m_dataDirAbsPath.AppendPath(dataDirPath);
+    }
 }
 
 std::shared_ptr<XStream> XFileManager::OpenStream(const XString& uri)
@@ -28,9 +45,9 @@ std::shared_ptr<XStream> XFileManager::OpenStream(const XString& uri)
     XString uriScheme;
     if (TryParseURI(uri, uriScheme, uriBody))
     {
-        if (uriScheme.Equals("app"))
+        if (uriScheme.Equals("data"))
         {
-            return OpenFileStream(m_appDirAbsPath, uriBody);
+            return OpenFileStream(m_dataDirAbsPath, uriBody);
         }
     }
     return std::shared_ptr<XStream>();
@@ -39,8 +56,8 @@ std::shared_ptr<XStream> XFileManager::OpenStream(const XString& uri)
 std::shared_ptr<XStream> XFileManager::OpenFileStream(const XPath& branchAbsPath, const XString& leaf)
 {
     XPath fileAbsPath(branchAbsPath);
-    if (!fileAbsPath.TryAppendXStr(leaf))
-        return std::shared_ptr<XFileStream>();
+    fileAbsPath.AppendXStr(leaf);
+    x_debug(fileAbsPath.ToXStr());
 
     x_debug(fileAbsPath.GetChars());
     std::shared_ptr<XFileStream> streamp = XPool<XFileStream>::NewObject();

@@ -7,87 +7,128 @@ namespace xf {
 
 char XPath::m_sep = '/';
 
-XPath::XPath(const XString& str)
-: m_chars("")
-, m_size(0)
+XPath:: XPath()
 {
-    x_verify(TryAssignXStr(str), "TOO_LONG_PATH");
+}
+
+XPath::XPath(const char* str)
+{
+    m_str = str;
+}
+
+XPath::XPath(const XString& str)
+{
+    m_str = str.ToString();
 }
 
 void XPath::AssignPath(const XPath& path)
 {
-    size_t pathSize = path.GetSize();
-    memcpy(m_chars, path.GetChars(), pathSize);
-    m_size = pathSize;
-    m_chars[m_size] = '\0';
+    m_str = path.m_str;
 }
 
-bool XPath::TryAssignXStr(const XString& str)
+void XPath::AssignXStr(const XString& str)
 {
-    size_t strSize = str.GetSize();
-    if (strSize >= CAPACITY - 1)
-        return false;
-
-    memcpy(m_chars, str.GetChars(), strSize);
-    m_size = strSize;
-    m_chars[m_size] = '\0';
-    return true;
+    m_str = str.ToString();
 }
 
-bool XPath::TryAssignXStrBranch(const XString& str)
+void XPath::AssignSStr(const std::string& str)
 {
-    XString branch = str.GetBranch(m_sep);
-    return TryAssignXStr(branch);
+    m_str = str;
 }
 
-bool XPath::TryAppendSep()
+void XPath::AppendSep()
 {
-    if (m_size > 0 && m_chars[m_size - 1] != m_sep)
+    size_t strLen = m_str.length();
+    if (strLen > 0 && m_str[strLen - 1] == m_sep)
     {
-        if (m_size + 1 >= CAPACITY - 1)
-            return false;
-
-        m_chars[m_size] += m_sep;
-        m_size++;
+        return;
     }
-    return true;
+
+    m_str += m_sep;
 }
 
-bool XPath::TryAppendXStr(const XString& str)
+void XPath::AppendPath(const XPath& path)
 {
-    size_t strSize = str.GetSize();
-    if (m_size + strSize >= CAPACITY - 1)
-        return false;
+    if (path.m_str.empty())
+        return;
 
-    memcpy(m_chars + m_size, str.GetChars(), strSize);
-    m_size += strSize;
-    m_chars[m_size] = '\0';
-    return true;
+    AppendSep();
+   
+    m_str += path.m_str; 
 }
-
-bool XPath::TryJoin(const XString& branch, const XString& leaf)
+void XPath::AppendXStr(const XString& str)
 {
-    const size_t branchSize = branch.GetSize();
-    const char* branchChars = branch.GetChars();
-    if (branchSize >= CAPACITY - 1)
-        return false;
+    AppendSep();
     
-    memcpy(m_chars, branchChars, branchSize);
-    m_size += branchSize;
+    m_str.append(str.GetChars(), str.GetSize());
+}
 
-    if (!TryAppendSep())
-        return false;
+void XPath::AppendSStr(const std::string& str)
+{
+    AppendSep();
+   
+    m_str += str; 
+}
 
-    const size_t leafSize = leaf.GetSize();
-    const char* leafChars = branch.GetChars();
-    if (m_size + leafSize >= CAPACITY - 1)
-        return false;
+void XPath::GetBranchExceptLeafs(size_t leafCount, XPath& outBranch) const
+{
+    int endIndex = m_str.length() - 1;
 
-    memcpy(m_chars, leafChars, leafSize);
-    m_size += leafSize;
+    size_t sepIndex = std::string::npos;
+    while (endIndex >= 0 && leafCount > 0)
+    {
+        sepIndex = m_str.find_last_of(m_sep, endIndex + 1);
+        if (sepIndex == std::string::npos)
+            break;
 
-    m_chars[m_size] = '\0';
-    return true;
+        endIndex = sepIndex - 1;
+        leafCount--;
+    }
+
+    outBranch.AssignSStr(m_str.substr(0, sepIndex));
+}
+
+bool XPath::IsRelPath() const
+{
+    if (m_str.empty())
+        return true;
+
+    if (m_str[0] == '.')
+        return true;
+
+    return false;
+}
+
+void XPath::GetLeafExceptRelNodes(size_t& outRelNodeCount, XPath& outLeaf) const
+{
+    size_t relNodeCount = 0;
+    size_t curIndex = 0;
+    size_t len = m_str.length();
+
+    while (curIndex < len)
+    {
+        size_t sepIndex = m_str.find_first_of(m_sep, curIndex);
+        if (sepIndex == std::string::npos)
+            break;
+
+        if (m_str[curIndex] != '.')
+            break;
+
+        if (m_str[curIndex + 1] == '.')
+            relNodeCount++;
+
+        curIndex = sepIndex + 1;
+    }
+
+    outRelNodeCount = relNodeCount;
+    outLeaf.AssignSStr(m_str.substr(curIndex));
+}
+
+void XPath::SplitBranchAndLeaf(XPath& outBranch, XPath& outLeaf) const
+{
+    size_t lastSepIndex = m_str.find_last_of(m_sep);
+    outBranch.AssignSStr(m_str.substr(0, lastSepIndex));
+    outLeaf.AssignSStr(m_str.substr(lastSepIndex + 1));
 }
 
 } // end_of_namespace:xf

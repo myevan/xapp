@@ -6,13 +6,6 @@
 
 namespace xf { 
 
-void XFileManager::SetProgramPath(const XString& programPath)
-{
-    x_verify(m_appDirAbsPath.TryAssignXStrBranch(programPath), "TOO_LONG_PROGRAM_PATH_BRANCH");
-
-    x_verify(m_appDirAbsPath.TryAppendSep(), "TOO_LONG_APP_DIR_ABS_PATH");
-}
-
 bool XFileManager::TryParseURI(const XString& uri, XString& outScheme, XString& outBody)
 {
     size_t schemeSepIndex;

@@ -26,7 +26,7 @@ int XLua::Print(lua_State* L)
 
         const char* paramChars = lua_tostring(L, -1); 
         if (paramChars == NULL)
-            return luaL_error(L, "NO_STRING_IN_LUA_STACK:%s", textBuilder.GetChars());
+            return luaL_error(L, "NOT_PASS_STRING_TO_PRINT:%s", textBuilder.GetChars());
 
         if (i > 1)
         {
@@ -67,15 +67,18 @@ int XLua::DoFile(lua_State* L)
 {
     const char* modulePath = lua_tostring(L, -1);
     if (!modulePath)
-        return luaL_error(L, "not string in the lua stack");
+        return luaL_error(L, "NOT_PASS_LUA_MODULE_PATH");
 
     x_debug(modulePath);
 
     char moduleUri[512];
-    sprintf(moduleUri, "app:%s", modulePath);
+    sprintf(moduleUri, "data:%s", modulePath);
 
     auto& fileManager = XPlatform::GetFileManager();
     auto moduleTextp = fileManager.LoadText(moduleUri);
+    if (!moduleTextp)
+        return luaL_error(L, "NOT_LOAD_LUA_MODULE_FILE:%s", moduleUri);
+        
     auto& moduleText = *moduleTextp;
     auto moduleTextSize = moduleText.GetSize();
     auto moduleTextChars = moduleText.GetChars();

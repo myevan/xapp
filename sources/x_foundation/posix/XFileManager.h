@@ -15,11 +15,14 @@ public:
 public:
     XFileManager();
 
-    void SetProgramPath(const XString& programPath) override;
+    void SetExecFilePath(const XPath& execFilePath) override;
+    void SetDataDirPath(const XPath& dataDirPath) override;
+
     std::shared_ptr<XStream> OpenStream(const XString& uri) override;
 
 private:
     std::shared_ptr<XStream> OpenFileStream(const XPath& branchAbsPath, const XString& leaf);
+
 };
 
 } } // end_of_namespace:xf.ns

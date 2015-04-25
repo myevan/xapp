@@ -23,10 +23,12 @@ public:
     {}
 
 public:
-    virtual void SetProgramPath(const XString& programPath);
+    virtual void SetExecFilePath(const XPath& execFilePath) = 0;
+    virtual void SetDataDirPath(const XPath& dataDirPath) = 0;
 
 public:
-    bool TryParseURI(const XString& uri, XString& outScheme, XString& outBody);
+    const XPath& GetExecFileName()
+    { return m_execFileName; }
 
 public:
     virtual std::shared_ptr<XStream> OpenStream(const XString& uri) = 0;
@@ -35,9 +37,14 @@ public:
     std::shared_ptr<XBinary>    LoadBinary(const XString& uri);
     std::shared_ptr<XText>      LoadText(const XString& uri);
 
+protected:
+    bool TryParseURI(const XString& uri, XString& outScheme, XString& outBody);
 
 protected:
-    XPath m_appDirAbsPath;
+    XPath m_execFileName;
+    XPath m_execFileAbsPath;
+    XPath m_execDirAbsPath;
+    XPath m_dataDirAbsPath;
 
 };
 

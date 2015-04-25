@@ -47,9 +47,9 @@ public:
     { return m_chars; }
 
 public:
-    inline void GetString(std::string& outStr) const
+    inline std::string ToString() const
     {
-        outStr.assign(m_chars, m_size);
+        return std::string(m_chars, m_size);
     }
 
     inline bool Equals(const char* chars) const

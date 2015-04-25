@@ -32,6 +32,7 @@ public:
 
     bool Open(const XPath& fileAbsPath)
     {
+        m_fileAbsPath = fileAbsPath;
         m_filePtr = fopen(fileAbsPath.GetChars(), "rb");
         if (!m_filePtr)
             return false;
@@ -54,6 +55,7 @@ public:
     }
 
 private:
+    XPath m_fileAbsPath;
     FILE* m_filePtr;
 };
 

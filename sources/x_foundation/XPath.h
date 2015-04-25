@@ -10,41 +10,42 @@ namespace xf {
 class XPath
 {
 public:
-    enum
-    {
-        CAPACITY = 512
-    };
-
-public:
-    XPath()
-    : m_chars("")
-    , m_size(0)
-    {
-    }
-
+    XPath();
+    XPath(const char* str);
     XPath(const XString& str);
 
     void AssignPath(const XPath& path);
-    bool TryAssignXStr(const XString& str);
-    bool TryAssignXStrBranch(const XString& str);
+    void AssignXStr(const XString& str);
+    void AssignSStr(const std::string& str);
 
-    bool TryJoin(const XString& head, const XString& tail);
-
-    bool TryAppendSep();
-    bool TryAppendXStr(const XString& str);
+    void AppendPath(const XPath& path);
+    void AppendXStr(const XString& str);
+    void AppendSStr(const std::string& str);
+    void AppendSep();
 
 public:
+    void SplitBranchAndLeaf(XPath& outBranch, XPath& outLeaf) const;
+
+    void GetBranchExceptLeafs(size_t leafCount, XPath& outBranch) const;
+    void GetLeafExceptRelNodes(size_t& outRelNodeCount, XPath& outLeaf) const;
+
+    bool IsRelPath() const;
+
+
+    XString ToXStr() const
+    { return XString(m_str.c_str(), m_str.length()); }
+
+    const std::string& ToSStr() const
+    { return m_str; }
+
     const char* GetChars() const
-    { return m_chars; }
+    { return m_str.c_str(); }
 
     size_t GetSize() const
-    { return m_size; }
+    { return m_str.length(); }
 
 private:
-    char m_chars[CAPACITY];
-
-private:
-    size_t m_size;
+    std::string m_str;
 
 private:
     static char m_sep;
