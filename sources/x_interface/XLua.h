@@ -10,12 +10,16 @@ extern "C"
 #include <lauxlib.h>
 };
 
-namespace xlua { 
+namespace xi { 
 
-int Print(lua_State* L);
-int DoFile(lua_State* L);
+class XLua
+{
+public:
+    static int Print(lua_State* L);
+    static int DoFile(lua_State* L);
+};
 
-}
+} // end_of_namespace:xi
 
 #endif
 

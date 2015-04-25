@@ -9,9 +9,9 @@
 
 using namespace xf;
 
-namespace xlua { 
+namespace xi { 
 
-int Print(lua_State* L)
+int XLua::Print(lua_State* L)
 {
     int n = lua_gettop(L);
     lua_getglobal(L, "tostring");
@@ -63,7 +63,7 @@ int Print(lua_State* L)
     return 0;
 }
 
-int DoFile(lua_State* L)
+int XLua::DoFile(lua_State* L)
 {
     const char* modulePath = lua_tostring(L, -1);
     if (!modulePath)
@@ -86,4 +86,4 @@ int DoFile(lua_State* L)
     return 0;
 }
 
-} // end_of_namespace:xlua
+} // end_of_namespace:xi

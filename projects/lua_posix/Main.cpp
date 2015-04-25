@@ -9,6 +9,7 @@
 #include <lua_tinker.h>
 
 using namespace xf;
+using namespace xi;
 
 int cpp_func(int arg1, int arg2)
 {
@@ -26,9 +27,9 @@ int main(int argc, const char** argv)
     // Lua 기본 함수들을 로드한다.- print() 사용
     luaopen_base(L);
 
-    lua_register(L, "print", &xlua::Print);
-    lua_register(L, "require", &xlua::DoFile);
-    lua_register(L, "dofile", &xlua::DoFile);
+    lua_register(L, "print", &XLua::Print);
+    lua_register(L, "require", &XLua::DoFile);
+    lua_register(L, "dofile", &XLua::DoFile);
 
     // LuaTinker 를 이용해서 함수를 등록한다.
     lua_tinker::def(L, "cpp_func", cpp_func);
